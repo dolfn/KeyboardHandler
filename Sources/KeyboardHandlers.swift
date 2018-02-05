@@ -1,9 +1,6 @@
 //
 //  KeyboardCenteringConstraintHandler.swift
-//  MoneyMiles
-//
-//  Created by Corneliu on 14/06/16.
-//  Copyright © 2016 Dolfn. All rights reserved.
+//  Copyright © 2018 Dolfn. All rights reserved.
 //
 
 import UIKit

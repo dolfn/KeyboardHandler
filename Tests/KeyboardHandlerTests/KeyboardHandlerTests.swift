@@ -1,9 +1,6 @@
 //
 //  KeyboardHandlerTests.swift
-//  Dolfn
-//
-//  Created by Corneliu Chitanu on 15/11/2017.
-//  Copyright © 2017 Dolfn. All rights reserved.
+//  Copyright © 2018 Dolfn. All rights reserved.
 //
 
 import Foundation
