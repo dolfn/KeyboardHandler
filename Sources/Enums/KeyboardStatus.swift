@@ -6,5 +6,8 @@
 import Foundation
 
 public enum KeyboardStatus {
-    case showing, hiding
+    case willShow
+    case willHide
+    case didShow
+    case didHide
 }

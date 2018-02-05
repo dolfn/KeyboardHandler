@@ -9,18 +9,30 @@ import UIKit
 public extension KeyboardShowingOrHidingListener where Self: KeyboardHandler {
     
     public func startListeningForShowingOrHidingTheKeyboard() {
-        let hideToken = NotificationCenter.default.addObserver(forName: NSNotification.Name.UIKeyboardWillHide, object: nil, queue: OperationQueue.main, using: { (notification) in
-            self.handleKeyboardNotification(notification, withKeyboardStatus: KeyboardStatus.hiding)
+        let willHideToken = NotificationCenter.default.addObserver(forName: NSNotification.Name.UIKeyboardWillHide, object: nil, queue: OperationQueue.main, using: { (notification) in
+            self.handleKeyboardNotification(notification, withKeyboardStatus: KeyboardStatus.willHide)
         })
         
-        let showToken = NotificationCenter.default.addObserver(forName: NSNotification.Name.UIKeyboardWillShow, object: nil, queue: OperationQueue.main, using: { (notification) in
-            self.handleKeyboardNotification(notification, withKeyboardStatus: KeyboardStatus.showing)
+        let willShowToken = NotificationCenter.default.addObserver(forName: NSNotification.Name.UIKeyboardWillShow, object: nil, queue: OperationQueue.main, using: { (notification) in
+            self.handleKeyboardNotification(notification, withKeyboardStatus: KeyboardStatus.willShow)
         })
+        
+        let didHideToken = NotificationCenter.default.addObserver(forName: NSNotification.Name.UIKeyboardDidHide, object: nil, queue: OperationQueue.main, using: { (notification) in
+            self.handleKeyboardNotification(notification, withKeyboardStatus: KeyboardStatus.didHide)
+        })
+        
+        let didShowToken = NotificationCenter.default.addObserver(forName: NSNotification.Name.UIKeyboardDidShow, object: nil, queue: OperationQueue.main, using: { (notification) in
+            self.handleKeyboardNotification(notification, withKeyboardStatus: KeyboardStatus.didShow)
+        })
+        
         if tokens == nil {
             tokens = [AnyObject]()
         }
-        tokens?.append(hideToken)
-        tokens?.append(showToken)
+        
+        tokens?.append(willHideToken)
+        tokens?.append(willShowToken)
+        tokens?.append(didHideToken)
+        tokens?.append(didShowToken)
     }
     
     public func stopListeningForShowingOrHidingKeyboard() {

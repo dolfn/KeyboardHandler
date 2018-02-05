@@ -17,6 +17,6 @@ public class KeyboardHandlerForCenteringConstraint: KeyboardHandler, KeyboardSho
     
     public func handleKeyboard(withHeight keyboardHeight: CGFloat, keyboardStatus: KeyboardStatus) {
         let constraintOffsetValue = keyboardHeight / 2.0
-        constraint?.constant += keyboardStatus == .showing ? -constraintOffsetValue : constraintOffsetValue
+        constraint?.constant += keyboardStatus == .willShow ? -constraintOffsetValue : constraintOffsetValue
     }
 }

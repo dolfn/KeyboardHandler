@@ -33,7 +33,7 @@ public class KeyboardHandlerForBottomConstraint: KeyboardHandler, KeyboardShowin
     }
     
     public func handleKeyboard(withHeight keyboardHeight: CGFloat, keyboardStatus: KeyboardStatus) {
-        constraint?.constant = keyboardStatus == .showing ? (keyboardHeight + constraintOffset) : constraintDefaultConstant
+        constraint?.constant = keyboardStatus == .willShow ? (keyboardHeight + constraintOffset) : constraintDefaultConstant
         
         
         if let viewToDismissKeyboardOnTap = viewToDismissKeyboardOnTap {
@@ -43,7 +43,7 @@ public class KeyboardHandlerForBottomConstraint: KeyboardHandler, KeyboardShowin
         else {
             tapGestureRecognizerManager = nil
         }
-        if keyboardStatus == .showing {
+        if keyboardStatus == .willShow {
             self.delegate?.didShowKeyboard(keyboardHeight)
         }
     }
