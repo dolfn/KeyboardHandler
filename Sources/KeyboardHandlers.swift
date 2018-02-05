@@ -8,21 +8,6 @@
 
 import UIKit
 
-public class KeyboardHandlerForCenteringConstraint: KeyboardHandler, KeyboardShowingOrHidingListener {
-    
-    fileprivate weak var constraint: NSLayoutConstraint?
-    public var tokens: [AnyObject]?
-    
-    init(constraint: NSLayoutConstraint?) {
-        self.constraint = constraint
-    }
-    
-    public func handleKeyboard(withHeight keyboardHeight: CGFloat, keyboardStatus: KeyboardStatus) {
-        let constraintOffsetValue = keyboardHeight / 2.0
-        constraint?.constant += keyboardStatus == .showing ? -constraintOffsetValue : constraintOffsetValue
-    }
-}
-
 public class KeyboardHandlerForBottomConstraint: KeyboardHandler, KeyboardShowingOrHidingListener, TapGestureRecognizerManagerDelegate {
     fileprivate weak var constraint: NSLayoutConstraint?
     var constraintDefaultConstant: CGFloat = 0
@@ -66,7 +51,7 @@ public class KeyboardHandlerForBottomConstraint: KeyboardHandler, KeyboardShowin
         }
     }
     
-    fileprivate func gestureRecognizerManagerDidTapOnView(_ tapGestureRecognizerManager: TapGestureRecognizerManager) {
+    func gestureRecognizerManagerDidTapOnView(_ tapGestureRecognizerManager: TapGestureRecognizerManager) {
         if let viewThatCanContainTextInputs = viewThatCanContainTextInputs{
             findActiveTextInput([viewThatCanContainTextInputs])
             activeTextInputView?.resignFirstResponder()
@@ -92,40 +77,5 @@ public class KeyboardHandlerForBottomConstraint: KeyboardHandler, KeyboardShowin
                 findActiveTextInput(subview.subviews)
             }
         }
-    }
-}
-
-private protocol TapGestureRecognizerManagerDelegate: class {
-    func gestureRecognizerManagerDidTapOnView(_ tapGestureRecognizerManager: TapGestureRecognizerManager)
-}
-
-private class TapGestureRecognizerManager {
-    
-    fileprivate weak var tapGestureRecognizer: UITapGestureRecognizer?
-    weak var viewToSetGestureRecognizerFor: UIView?
-    weak var delegate: TapGestureRecognizerManagerDelegate?
-    
-    init(viewToSetGestureRecognizerFor: UIView) {
-        self.viewToSetGestureRecognizerFor = viewToSetGestureRecognizerFor
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(TapGestureRecognizerManager.gestureRecognizerDidTap(_:)))
-        viewToSetGestureRecognizerFor.addGestureRecognizer(tapGestureRecognizer)
-        self.tapGestureRecognizer = tapGestureRecognizer
-    }
-    
-    deinit {
-        if let tapGestureRecognizer = tapGestureRecognizer {
-            tapGestureRecognizer.removeTarget(self, action: #selector(TapGestureRecognizerManager.gestureRecognizerDidTap(_:)))
-            viewToSetGestureRecognizerFor?.removeGestureRecognizer(tapGestureRecognizer)
-        }
-    }
-    
-    fileprivate func removeGestureRecognizer() {
-        if let tapGestureRecognizer = tapGestureRecognizer {
-            viewToSetGestureRecognizerFor?.removeGestureRecognizer(tapGestureRecognizer)
-        }
-    }
-    
-    @objc fileprivate func gestureRecognizerDidTap(_ tapGestureRecognizer: UITapGestureRecognizer) {
-        delegate?.gestureRecognizerManagerDidTapOnView(self)
     }
 }

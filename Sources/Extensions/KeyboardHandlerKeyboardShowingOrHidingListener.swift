@@ -1,36 +1,13 @@
 //
-//  KeyboardDisplayHandler.swift
-//  MoneyMiles
+//  KeyboardHandlerKeyboardShowingOrHidingListener.swift
+//  KeyboardHandler-iOS
 //
-//  Created by Corneliu on 13/06/16.
-//  Copyright © 2016 Dolfn. All rights reserved.
+//  Created by Andrei Nastasiu on 05/02/2018.
+//  Copyright © 2018 Dolfn. All rights reserved.
 //
 
 import Foundation
 import UIKit
-
-
-public enum KeyboardStatus {
-    case showing, hiding
-}
-
-public protocol KeyboardShowingOrHidingListener: class {
-    var tokens: [AnyObject]? { get set }
-    func startListeningForShowingOrHidingTheKeyboard()
-    func stopListeningForShowingOrHidingKeyboard()
-}
-
-protocol KeyboardHandlerDelegate: class {
-    func didShowKeyboard(_ keyboardHeight: CGFloat)
-}
-
-public protocol KeyboardHandler {
-    func handleKeyboard(withHeight keyboardHeight: CGFloat, keyboardStatus: KeyboardStatus)
-}
-
-protocol KeyboardFirstResponder {
-    var isTextInputFirstResponder: Bool { get }
-}
 
 public extension KeyboardShowingOrHidingListener where Self: KeyboardHandler {
     
