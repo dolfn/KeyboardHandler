@@ -24,4 +24,13 @@ class TapGestureRecognizerManagerTests: XCTestCase {
         wait(for: 0.1)
         XCTAssertNil(sut.viewToSetGestureRecognizerFor)
     }
+    
+    func test_AtInitialization_IsAddingTapGestureForGivenView() {
+        let view = UIView()
+        let _ = TapGestureRecognizerManager(viewToSetGestureRecognizerFor: view)
+        wait(for: 0.1)
+        XCTAssertEqual(view.gestureRecognizers!.count, 1)
+        let gestureRecognizer = view.gestureRecognizers!.first
+        XCTAssertTrue(gestureRecognizer is UITapGestureRecognizer)
+    }
 }

@@ -14,9 +14,9 @@ class TapGestureRecognizerManager {
     
     init(viewToSetGestureRecognizerFor: UIView) {
         self.viewToSetGestureRecognizerFor = viewToSetGestureRecognizerFor
-//        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(TapGestureRecognizerManager.gestureRecognizerDidTap(_:)))
-//        viewToSetGestureRecognizerFor.addGestureRecognizer(tapGestureRecognizer)
-//        self.tapGestureRecognizer = tapGestureRecognizer
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(TapGestureRecognizerManager.gestureRecognizerDidTap(_:)))
+        viewToSetGestureRecognizerFor.addGestureRecognizer(tapGestureRecognizer)
+        self.tapGestureRecognizer = tapGestureRecognizer
     }
     
     deinit {
