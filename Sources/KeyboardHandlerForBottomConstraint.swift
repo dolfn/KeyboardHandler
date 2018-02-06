@@ -18,33 +18,27 @@ public class KeyboardHandlerForBottomConstraint: KeyboardHandler, KeyboardShowin
     private weak var viewThatCanContainTextInputs: UIView?
     private weak var activeTextInputView: UIView?
     
-    public init(constraintToAnimate: NSLayoutConstraint, viewThatCanContainTextInputs: UIView?, viewToDismissKeyboardOnTap: UIView?) {
+    public init(constraintToAnimate: NSLayoutConstraint, constraintOffset: CGFloat, viewThatCanContainTextInputs: UIView?, viewToDismissKeyboardOnTap: UIView? = nil) {
 //        self.constraint = constraintToAnimate
 //        constraintDefaultConstant = constraintToAnimate.constant
 //        self.viewThatCanContainTextInputs = viewThatCanContainTextInputs
-//        self.viewToDismissKeyboardOnTap = viewToDismissKeyboardOnTap
+        self.viewToDismissKeyboardOnTap = viewToDismissKeyboardOnTap
+//        self.constraintOffset = constraintOffset
     }
     
-    public init(constraintToAnimate: NSLayoutConstraint, constraintOffset: CGFloat, viewThatCanContainTextInputs: UIView, viewToDismissKeyboardOnTap: UIView?) {
-//        self.constraint = constraintToAnimate
-//        constraintDefaultConstant = constraintToAnimate.constant
-//        self.viewThatCanContainTextInputs = viewThatCanContainTextInputs
-//        self.viewToDismissKeyboardOnTap = viewToDismissKeyboardOnTap
-//        self.constraintOffset = constraintOffset
+    deinit {
+//        tapGestureRecognizerManager?.removeGestureRecognizer()
+//        tapGestureRecognizerManager = nil
     }
     
     public func handleKeyboard(withHeight keyboardHeight: CGFloat, keyboardStatus: KeyboardStatus) {
 //        constraint?.constant = keyboardStatus == .willShow ? (keyboardHeight + constraintOffset) : constraintDefaultConstant
 //
-//
-//        if let viewToDismissKeyboardOnTap = viewToDismissKeyboardOnTap {
-//            tapGestureRecognizerManager = TapGestureRecognizerManager(viewToSetGestureRecognizerFor: viewToDismissKeyboardOnTap)
-//            tapGestureRecognizerManager!.delegate = self
-//        }
-//        else {
-//            tapGestureRecognizerManager = nil
-//        }
-//
+        if let viewToDismissKeyboardOnTap = viewToDismissKeyboardOnTap {
+            tapGestureRecognizerManager = TapGestureRecognizerManager(viewToSetGestureRecognizerFor: viewToDismissKeyboardOnTap)
+            tapGestureRecognizerManager!.delegate = self
+        }
+
         switch keyboardStatus {
         case .willShow:
             delegate?.willShowKeyboard(height: keyboardHeight)
@@ -58,17 +52,12 @@ public class KeyboardHandlerForBottomConstraint: KeyboardHandler, KeyboardShowin
     }
     
     func gestureRecognizerManagerDidTapOnView(_ tapGestureRecognizerManager: TapGestureRecognizerManager) {
-//        if let viewThatCanContainTextInputs = viewThatCanContainTextInputs{
+//        if let viewThatCanContainTextInputs = viewThatCanContainTextInputs {
 //            findActiveTextInput([viewThatCanContainTextInputs])
 //            activeTextInputView?.resignFirstResponder()
 //            tapGestureRecognizerManager.removeGestureRecognizer()
 //            self.tapGestureRecognizerManager = nil
 //        }
-    }
-    
-    deinit {
-//        tapGestureRecognizerManager?.removeGestureRecognizer()
-//        tapGestureRecognizerManager = nil
     }
     
     private func findActiveTextInput(_ viewsToLookIntoForTextField: [UIView]) {

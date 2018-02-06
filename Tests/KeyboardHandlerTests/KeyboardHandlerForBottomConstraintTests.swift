@@ -9,15 +9,20 @@ import XCTest
 
 class KeyboardHandlerForBottomConstraintTests: XCTestCase {
 
+    weak var weakSut: KeyboardHandlerForBottomConstraint?
     var sut: KeyboardHandlerForBottomConstraint!
     var delegate: KeyboardHandlerDelegateSpy!
+    private var viewThatCanContainTextInputs: UIView?
+    private var viewToDismissKeyboardOnTap: UIView?
     
     override func setUp() {
         super.setUp()
         let constraintToAnimate = NSLayoutConstraint()
         let constraintOffset: CGFloat = 10
-        let viewThatCanContainTextInputs = UIView()
-        sut = KeyboardHandlerForBottomConstraint(constraintToAnimate: constraintToAnimate, constraintOffset: constraintOffset, viewThatCanContainTextInputs: viewThatCanContainTextInputs, viewToDismissKeyboardOnTap: nil)
+        viewThatCanContainTextInputs = UIView()
+        viewToDismissKeyboardOnTap = UIView()
+        sut = KeyboardHandlerForBottomConstraint(constraintToAnimate: constraintToAnimate, constraintOffset: constraintOffset, viewThatCanContainTextInputs: viewThatCanContainTextInputs!, viewToDismissKeyboardOnTap: viewToDismissKeyboardOnTap)
+        weakSut = sut
         delegate = KeyboardHandlerDelegateSpy()
         sut.delegate = delegate
     }
@@ -25,6 +30,8 @@ class KeyboardHandlerForBottomConstraintTests: XCTestCase {
     override func tearDown() {
         sut = nil
         delegate = nil
+        viewThatCanContainTextInputs = nil
+        viewToDismissKeyboardOnTap = nil
         super.tearDown()
     }
     
@@ -62,6 +69,12 @@ class KeyboardHandlerForBottomConstraintTests: XCTestCase {
         XCTAssertFalse(delegate.willHideKeyboardCalled)
         XCTAssertTrue(delegate.didHideKeyboardCalled)
         XCTAssertEqual(delegate.receivedHeight!, 100)
+    }
+    
+    func test_DeallocationWhenSettingItselfAsDelegate_ToTapGestureRecognizerManager() {
+        sut.handleKeyboard(withHeight: 100, keyboardStatus: .willShow)
+        sut = nil
+        XCTAssertNil(weakSut)
     }
     
 }
