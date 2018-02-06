@@ -9,16 +9,17 @@ import XCTest
 
 class KeyboardHandlerForBottomConstraintTests: XCTestCase {
 
-    weak var weakSut: KeyboardHandlerForBottomConstraint?
-    var sut: KeyboardHandlerForBottomConstraint!
-    var delegate: KeyboardHandlerDelegateSpy!
+    private var sut: KeyboardHandlerForBottomConstraint!
+    private var delegate: KeyboardHandlerDelegateSpy!
     private var viewThatCanContainTextInputs: UIView?
     private var viewToDismissKeyboardOnTap: UIView?
+    private var constraintToAnimate: NSLayoutConstraint!
+    private weak var weakSut: KeyboardHandlerForBottomConstraint?
     
     override func setUp() {
         super.setUp()
-        let constraintToAnimate = NSLayoutConstraint()
         let constraintOffset: CGFloat = 10
+        constraintToAnimate = NSLayoutConstraint()
         viewThatCanContainTextInputs = UIView()
         viewToDismissKeyboardOnTap = UIView()
         sut = KeyboardHandlerForBottomConstraint(constraintToAnimate: constraintToAnimate, constraintOffset: constraintOffset, viewThatCanContainTextInputs: viewThatCanContainTextInputs!, viewToDismissKeyboardOnTap: viewToDismissKeyboardOnTap)
@@ -75,6 +76,11 @@ class KeyboardHandlerForBottomConstraintTests: XCTestCase {
         sut.handleKeyboard(withHeight: 100, keyboardStatus: .willShow)
         sut = nil
         XCTAssertNil(weakSut)
+    }
+    
+    func test_WhenCallingWillShowKeyboard_ChangeConstraintValueIncludingOffsetAndKeyboardHeight() {
+        sut.handleKeyboard(withHeight: 300, keyboardStatus: .willShow)
+        XCTAssertEqual(constraintToAnimate.constant, 310)
     }
     
 }
