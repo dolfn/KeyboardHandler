@@ -11,19 +11,34 @@ import XCTest
 
 class KeyboardHandlerForCenteringConstraintTests: XCTestCase {
     
-    func test_ShowingKeyboard_DecreaseConstraintValueWithHalfOfTheKeyboardValue() {
-        let constraint = NSLayoutConstraint()
+    var constraint: NSLayoutConstraint!
+    var sut: KeyboardHandlerForCenteringConstraint!
+    
+    override func setUp() {
+        super.setUp()
+        constraint = NSLayoutConstraint()
         constraint.constant = 100
-        let sut = KeyboardHandlerForCenteringConstraint(constraint: constraint)
+        sut = KeyboardHandlerForCenteringConstraint(constraint: constraint)
+    }
+    
+    override func tearDown() {
+        constraint = nil
+        sut = nil
+        super.tearDown()
+    }
+    
+    func test_ShowingKeyboard_DecreaseConstraintValueWithHalfOfTheKeyboardValue() {
         sut.handleKeyboard(withHeight: 600, keyboardStatus: .willShow)
         XCTAssertEqual(constraint.constant, -200)
     }
     
     func test_HidingKeyboard_DecreaseConstraintValueWithHalfOfTheKeyboardValue() {
-        let constraint = NSLayoutConstraint()
-        constraint.constant = -200
-        let sut = KeyboardHandlerForCenteringConstraint(constraint: constraint)
         sut.handleKeyboard(withHeight: 600, keyboardStatus: .willHide)
+        XCTAssertEqual(constraint.constant, 400)
+    }
+    
+    func test_DidShowKeyboard_DoNotChangeTheValueOfConstraint() {
+        sut.handleKeyboard(withHeight: 600, keyboardStatus: .didShow)
         XCTAssertEqual(constraint.constant, 100)
     }
 }
