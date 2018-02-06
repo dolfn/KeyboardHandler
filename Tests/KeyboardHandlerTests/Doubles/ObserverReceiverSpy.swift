@@ -14,11 +14,13 @@ class ObserverReceiverSpy: ObserverReceiver {
     var objs = [Any]()
     var queues = [OperationQueue]()
     var blocks = [((Notification) -> Void)]()
+    var pairredNotificationsWithBlocks = [NSNotification.Name: ((Notification) -> Void)]()
     
     func addObserver(forName name: NSNotification.Name?, object obj: Any?, queue: OperationQueue?, using block: @escaping (Notification) -> Void) -> NSObjectProtocol {
         
         if let name = name {
             names.append(name)
+            pairredNotificationsWithBlocks[name] = block
         }
         
         if let obj = obj {
@@ -30,6 +32,7 @@ class ObserverReceiverSpy: ObserverReceiver {
         }
         
         blocks.append(block)
+        
         
         return NSObject()
     }

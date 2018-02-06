@@ -29,4 +29,16 @@ class KeyboardHandlerKeyboardShowingOrHidingListenerTests: XCTestCase {
         XCTAssertEqual(observerReceiver.queues[3], OperationQueue.main)
     }
     
+    func test_CallingWillShowKeyboardCompletion_ProvidesGivenKeyboardRectToDelegate() {
+        let constraint = NSLayoutConstraint()
+        constraint.constant = 100
+        let sut = KeyboardHandlerForCenteringConstraint(constraint: constraint)
+        let observerReceiver: ObserverReceiverSpy = ObserverReceiverSpy()
+        sut.startListeningForKeyboardEvents(in: observerReceiver)
+        let function = observerReceiver.pairredNotificationsWithBlocks[NSNotification.Name.UIKeyboardWillShow]
+        let userInfo = [UIKeyboardFrameEndUserInfoKey: CGRect(x: 0, y: 0, width: 400, height: 300)]
+        let notification = Notification(name: NSNotification.Name.UIKeyboardWillShow, object: nil, userInfo: userInfo)
+        function?(notification)
+        XCTAssertEqual(constraint.constant, -50)
+    }
 }

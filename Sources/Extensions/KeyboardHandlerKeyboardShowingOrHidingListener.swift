@@ -13,8 +13,8 @@ public extension KeyboardShowingOrHidingListener where Self: KeyboardHandler {
             tokens = [AnyObject]()
         }
         
-        let willShowToken = receiver.addObserver(forName: NSNotification.Name.UIKeyboardWillShow, object: nil, queue: OperationQueue.main, using: { (notification) in
-//            self.handleKeyboardNotification(notification, withKeyboardStatus: KeyboardStatus.willShow)
+        let willShowToken = receiver.addObserver(forName: NSNotification.Name.UIKeyboardWillShow, object: nil, queue: OperationQueue.main, using: { [weak self] (notification) in
+            self?.handleKeyboardNotification(notification, withKeyboardStatus: KeyboardStatus.willShow)
         })
         tokens?.append(willShowToken)
         
@@ -46,10 +46,10 @@ public extension KeyboardShowingOrHidingListener where Self: KeyboardHandler {
     
     
     fileprivate func handleKeyboardNotification(_ notification: Notification, withKeyboardStatus keyboardStatus: KeyboardStatus) {
-//        if let userInfo = (notification as NSNotification).userInfo {
-//            let keyboardRect = (userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
-//            let keyboardHeight = keyboardRect!.height
-//            handleKeyboard(withHeight: keyboardHeight, keyboardStatus: keyboardStatus)
-//        }
+        if let userInfo = notification.userInfo {
+            if let keyboardRect = userInfo[UIKeyboardFrameEndUserInfoKey] as? CGRect {
+                handleKeyboard(withHeight: keyboardRect.height, keyboardStatus: keyboardStatus)
+            }
+        }
     }
 }
