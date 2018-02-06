@@ -20,6 +20,8 @@ public class KeyboardHandlerForCenteringConstraint: KeyboardHandler, KeyboardSho
         switch keyboardStatus {
         case .willShow:
              constraint?.constant += -constraintOffsetValue
+        case .willHide:
+            constraint?.constant += constraintOffsetValue
         default:
             break
         }

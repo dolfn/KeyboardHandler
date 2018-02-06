@@ -18,4 +18,12 @@ class KeyboardHandlerForCenteringConstraintTests: XCTestCase {
         sut.handleKeyboard(withHeight: 600, keyboardStatus: .willShow)
         XCTAssertEqual(constraint.constant, -200)
     }
+    
+    func test_HidingKeyboard_DecreaseConstraintValueWithHalfOfTheKeyboardValue() {
+        let constraint = NSLayoutConstraint()
+        constraint.constant = -200
+        let sut = KeyboardHandlerForCenteringConstraint(constraint: constraint)
+        sut.handleKeyboard(withHeight: 600, keyboardStatus: .willHide)
+        XCTAssertEqual(constraint.constant, 100)
+    }
 }
