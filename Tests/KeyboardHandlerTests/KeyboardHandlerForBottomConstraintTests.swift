@@ -89,4 +89,11 @@ class KeyboardHandlerForBottomConstraintTests: XCTestCase {
         XCTAssertEqual(constraintToAnimate.constant, 50)
     }
     
+    func test_DeallocatingSUT_IsRemovingTapGestureRecognizerFromGivenView() {
+        sut.handleKeyboard(withHeight: 100, keyboardStatus: .willShow)
+        XCTAssertEqual(viewToDismissKeyboardOnTap!.gestureRecognizers!.count, 1)
+        sut = nil
+        XCTAssertEqual(viewToDismissKeyboardOnTap!.gestureRecognizers!.count, 0)
+    }
+    
 }
