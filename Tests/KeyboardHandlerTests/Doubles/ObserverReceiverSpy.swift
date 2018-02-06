@@ -23,11 +23,7 @@ class ObserverReceiverSpy: ObserverReceiver {
             names.append(name)
             pairredNotificationsWithBlocks[name] = block
         }
-        
-        if let obj = obj {
-            objs.append(obj)
-        }
-        
+                
         if let queue = queue {
             queues.append(queue)
         }
