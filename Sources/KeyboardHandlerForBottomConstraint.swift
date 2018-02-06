@@ -7,16 +7,16 @@ import UIKit
 
 public class KeyboardHandlerForBottomConstraint: KeyboardHandler, KeyboardShowingOrHidingListener, TapGestureRecognizerManagerDelegate {
     
-    fileprivate weak var constraint: NSLayoutConstraint?
     var constraintDefaultConstant: CGFloat = 0
     var constraintOffset: CGFloat = 0
     public var tokens: [AnyObject]?
     public weak var delegate: KeyboardHandlerDelegate?
     
-    fileprivate var tapGestureRecognizerManager: TapGestureRecognizerManager?
-    fileprivate weak var viewToDismissKeyboardOnTap: UIView?
-    fileprivate weak var viewThatCanContainTextInputs: UIView?
-    fileprivate weak var activeTextInputView: UIView?
+    private var tapGestureRecognizerManager: TapGestureRecognizerManager?
+    private weak var constraint: NSLayoutConstraint?
+    private weak var viewToDismissKeyboardOnTap: UIView?
+    private weak var viewThatCanContainTextInputs: UIView?
+    private weak var activeTextInputView: UIView?
     
     public init(constraintToAnimate: NSLayoutConstraint, viewThatCanContainTextInputs: UIView?, viewToDismissKeyboardOnTap: UIView?) {
 //        self.constraint = constraintToAnimate
@@ -71,7 +71,7 @@ public class KeyboardHandlerForBottomConstraint: KeyboardHandler, KeyboardShowin
 //        tapGestureRecognizerManager = nil
     }
     
-    fileprivate func findActiveTextInput(_ viewsToLookIntoForTextField: [UIView]) {
+    private func findActiveTextInput(_ viewsToLookIntoForTextField: [UIView]) {
 //        for subview in viewsToLookIntoForTextField {
 //            if let textField = subview as? UITextField , textField.isFirstResponder {
 //                activeTextInputView = textField
