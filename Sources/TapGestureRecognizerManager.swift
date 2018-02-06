@@ -27,9 +27,9 @@ class TapGestureRecognizerManager {
     }
     
     func removeGestureRecognizer() {
-//        if let tapGestureRecognizer = tapGestureRecognizer {
-//            viewToSetGestureRecognizerFor?.removeGestureRecognizer(tapGestureRecognizer)
-//        }
+        if let tapGestureRecognizer = tapGestureRecognizer {
+            viewToSetGestureRecognizerFor?.removeGestureRecognizer(tapGestureRecognizer)
+        }
     }
     
     @objc func gestureRecognizerDidTap(_ tapGestureRecognizer: UITapGestureRecognizer) {

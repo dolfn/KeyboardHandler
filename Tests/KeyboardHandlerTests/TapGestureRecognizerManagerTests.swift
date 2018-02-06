@@ -27,7 +27,6 @@ class TapGestureRecognizerManagerTests: XCTestCase {
     }
     
     func test_GivenViewAtInitialization_IsSavedAsProperty() {
-
         XCTAssertEqual(sut.viewToSetGestureRecognizerFor, view)
     }
     
@@ -47,6 +46,11 @@ class TapGestureRecognizerManagerTests: XCTestCase {
     func test_AtDellocation_IsRemovingTapGestureForGivenView() {
         wait(for: 0.1)
         sut = nil
+        XCTAssertEqual(view.gestureRecognizers!.count, 0)
+    }
+    
+    func test_WhenCallingRemoveTapGesture_RemoveTapGestureFromGivenView() {
+        sut.removeGestureRecognizer()
         XCTAssertEqual(view.gestureRecognizers!.count, 0)
     }
 }
