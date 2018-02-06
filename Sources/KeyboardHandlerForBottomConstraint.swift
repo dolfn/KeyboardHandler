@@ -59,6 +59,8 @@ public class KeyboardHandlerForBottomConstraint: KeyboardHandler, KeyboardShowin
         for aView in views {
             if let textField = aView as? UITextField, textField.isFirstResponder {
                 activeTextInputView = textField
+            } else if let textView = aView as? UITextView, textView.isFirstResponder {
+                activeTextInputView = textView
             } else {
                 findActiveTextInput(in: aView.subviews)
             }

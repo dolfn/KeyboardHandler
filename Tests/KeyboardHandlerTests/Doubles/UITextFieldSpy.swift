@@ -12,8 +12,10 @@ import UIKit
 class UITextFieldSpy: UITextField {
     
     var resignFirstResponderCalled = false
+    var didAskIfItIsFirstResponder = false
     
     override var isFirstResponder: Bool {
+        didAskIfItIsFirstResponder = true
         return true
     }
     
