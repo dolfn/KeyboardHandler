@@ -7,8 +7,8 @@ import UIKit
 
 public class KeyboardHandlerForBottomConstraint: KeyboardHandler, KeyboardShowingOrHidingListener, TapGestureRecognizerManagerDelegate {
     
-    var constraintDefaultConstant: CGFloat = 0
-    var constraintOffset: CGFloat = 0
+    public var constraintDefaultConstant: CGFloat = 0
+    public var constraintOffset: CGFloat = 0
     public var tokens: [AnyObject]?
     public weak var delegate: KeyboardHandlerDelegate?
     
