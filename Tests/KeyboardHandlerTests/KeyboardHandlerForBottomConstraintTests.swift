@@ -55,4 +55,12 @@ class KeyboardHandlerForBottomConstraintTests: XCTestCase {
         XCTAssertEqual(delegate.receivedHeight!, 100)
     }
     
+    func test_DidHideKeyboardEvent_DidCallDelegate() {
+        sut.handleKeyboard(withHeight: 100, keyboardStatus: .didHide)
+        XCTAssertFalse(delegate.willShowKeyboardCalled)
+        XCTAssertFalse(delegate.didShowKeyboardCalled)
+        XCTAssertFalse(delegate.willHideKeyboardCalled)
+        XCTAssertTrue(delegate.didHideKeyboardCalled)
+        XCTAssertEqual(delegate.receivedHeight!, 100)
+    }
 }

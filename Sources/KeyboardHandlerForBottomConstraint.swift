@@ -52,7 +52,8 @@ public class KeyboardHandlerForBottomConstraint: KeyboardHandler, KeyboardShowin
             delegate?.didShowKeyboard(height: keyboardHeight)
         case .willHide:
             delegate?.willHideKeyboard(height: keyboardHeight)
-        default: break
+        case .didHide:
+            delegate?.didHideKeyboard(height: keyboardHeight)
         }
     }
     
