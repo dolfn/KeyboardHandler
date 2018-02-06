@@ -50,6 +50,8 @@ public class KeyboardHandlerForBottomConstraint: KeyboardHandler, KeyboardShowin
             delegate?.willShowKeyboard(height: keyboardHeight)
         case .didShow:
             delegate?.didShowKeyboard(height: keyboardHeight)
+        case .willHide:
+            delegate?.willHideKeyboard(height: keyboardHeight)
         default: break
         }
     }
