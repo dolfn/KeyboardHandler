@@ -16,4 +16,12 @@ class TapGestureRecognizerManagerTests: XCTestCase {
         let sut = TapGestureRecognizerManager(viewToSetGestureRecognizerFor: view)
         XCTAssertEqual(sut.viewToSetGestureRecognizerFor, view)
     }
+    
+    func test_GivenViewAtInitialization_IsReatinedAsWeakReference() {
+        var view: UIView? = UIView()
+        let sut = TapGestureRecognizerManager(viewToSetGestureRecognizerFor: view!)
+        view = nil
+        wait(for: 0.1)
+        XCTAssertNil(sut.viewToSetGestureRecognizerFor)
+    }
 }
