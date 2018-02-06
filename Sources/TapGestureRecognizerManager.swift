@@ -13,7 +13,7 @@ class TapGestureRecognizerManager {
     weak var delegate: TapGestureRecognizerManagerDelegate?
     
     init(viewToSetGestureRecognizerFor: UIView) {
-//        self.viewToSetGestureRecognizerFor = viewToSetGestureRecognizerFor
+        self.viewToSetGestureRecognizerFor = viewToSetGestureRecognizerFor
 //        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(TapGestureRecognizerManager.gestureRecognizerDidTap(_:)))
 //        viewToSetGestureRecognizerFor.addGestureRecognizer(tapGestureRecognizer)
 //        self.tapGestureRecognizer = tapGestureRecognizer
