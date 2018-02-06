@@ -6,6 +6,8 @@
 //  Copyright © 2018 Dolfn. All rights reserved.
 //
 
+import Foundation
+import UIKit
 import XCTest
 @testable import KeyboardHandler
 
@@ -50,7 +52,16 @@ class TapGestureRecognizerManagerTests: XCTestCase {
     }
     
     func test_WhenCallingRemoveTapGesture_RemoveTapGestureFromGivenView() {
+        wait(for: 0.1)
         sut.removeGestureRecognizer()
         XCTAssertEqual(view.gestureRecognizers!.count, 0)
     }
+    
+    func test_HandleDidTapFunction_WillCallTheDelegateFunction() {
+        let delegate = TapGestureRecognizerManagerDelegateSpy()
+        sut.delegate = delegate
+        sut.gestureRecognizerDidTap(UITapGestureRecognizer())
+        XCTAssertTrue(delegate.tapGestureRecognizerManager === sut)
+    }
 }
+

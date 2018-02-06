@@ -8,7 +8,7 @@ import UIKit
 
 class TapGestureRecognizerManager {
     
-    fileprivate weak var tapGestureRecognizer: UITapGestureRecognizer?
+    private weak var tapGestureRecognizer: UITapGestureRecognizer?
     weak var viewToSetGestureRecognizerFor: UIView?
     weak var delegate: TapGestureRecognizerManagerDelegate?
     
@@ -33,6 +33,6 @@ class TapGestureRecognizerManager {
     }
     
     @objc func gestureRecognizerDidTap(_ tapGestureRecognizer: UITapGestureRecognizer) {
-//        delegate?.gestureRecognizerManagerDidTapOnView(self)
+        delegate?.gestureRecognizerManagerDidTapOnView(self)
     }
 }
