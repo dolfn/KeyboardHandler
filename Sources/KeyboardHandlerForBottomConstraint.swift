@@ -44,10 +44,10 @@ public class KeyboardHandlerForBottomConstraint: KeyboardHandler, KeyboardShowin
 //        else {
 //            tapGestureRecognizerManager = nil
 //        }
-//        
-//        if keyboardStatus == .willShow {
-//            self.delegate?.willShowKeyboard(height: keyboardHeight)
-//        }
+//
+        if keyboardStatus == .willShow {
+            self.delegate?.willShowKeyboard(height: keyboardHeight)
+        }
     }
     
     func gestureRecognizerManagerDidTapOnView(_ tapGestureRecognizerManager: TapGestureRecognizerManager) {

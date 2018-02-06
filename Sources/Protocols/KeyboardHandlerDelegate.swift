@@ -6,6 +6,9 @@
 import Foundation
 import UIKit
 
-protocol KeyboardHandlerDelegate: class {
-    func didShowKeyboard(_ keyboardHeight: CGFloat)
+public protocol KeyboardHandlerDelegate: class {
+    func willShowKeyboard(height: CGFloat)
+    func didShowKeyboard(height: CGFloat)
+    func willHideKeyboard(height: CGFloat)
+    func didHideKeyboard(height: CGFloat)
 }
