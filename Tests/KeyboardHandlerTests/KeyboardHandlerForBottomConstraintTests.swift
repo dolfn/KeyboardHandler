@@ -20,6 +20,7 @@ class KeyboardHandlerForBottomConstraintTests: XCTestCase {
         super.setUp()
         let constraintOffset: CGFloat = 10
         constraintToAnimate = NSLayoutConstraint()
+        constraintToAnimate.constant = 50
         viewThatCanContainTextInputs = UIView()
         viewToDismissKeyboardOnTap = UIView()
         sut = KeyboardHandlerForBottomConstraint(constraintToAnimate: constraintToAnimate, constraintOffset: constraintOffset, viewThatCanContainTextInputs: viewThatCanContainTextInputs!, viewToDismissKeyboardOnTap: viewToDismissKeyboardOnTap)
@@ -81,6 +82,11 @@ class KeyboardHandlerForBottomConstraintTests: XCTestCase {
     func test_WhenCallingWillShowKeyboard_ChangeConstraintValueIncludingOffsetAndKeyboardHeight() {
         sut.handleKeyboard(withHeight: 300, keyboardStatus: .willShow)
         XCTAssertEqual(constraintToAnimate.constant, 310)
+    }
+    
+    func test_WhenCallingWillHideKeyboard_ChangeConstraintValueIncludingOffsetAndKeyboardHeight() {
+        sut.handleKeyboard(withHeight: 300, keyboardStatus: .willHide)
+        XCTAssertEqual(constraintToAnimate.constant, 50)
     }
     
 }

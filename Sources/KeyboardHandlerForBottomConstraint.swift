@@ -20,7 +20,7 @@ public class KeyboardHandlerForBottomConstraint: KeyboardHandler, KeyboardShowin
     
     public init(constraintToAnimate: NSLayoutConstraint, constraintOffset: CGFloat, viewThatCanContainTextInputs: UIView?, viewToDismissKeyboardOnTap: UIView? = nil) {
         self.constraint = constraintToAnimate
-//        constraintDefaultConstant = constraintToAnimate.constant
+        constraintDefaultConstant = constraintToAnimate.constant
 //        self.viewThatCanContainTextInputs = viewThatCanContainTextInputs
         self.viewToDismissKeyboardOnTap = viewToDismissKeyboardOnTap
         self.constraintOffset = constraintOffset
@@ -46,6 +46,7 @@ public class KeyboardHandlerForBottomConstraint: KeyboardHandler, KeyboardShowin
             delegate?.didShowKeyboard(height: keyboardHeight)
         case .willHide:
             delegate?.willHideKeyboard(height: keyboardHeight)
+            constraint?.constant = constraintDefaultConstant
         case .didHide:
             delegate?.didHideKeyboard(height: keyboardHeight)
         }
