@@ -15,6 +15,7 @@ class ObserverReceiverSpy: ObserverReceiver {
     var queues = [OperationQueue]()
     var blocks = [((Notification) -> Void)]()
     var pairredNotificationsWithBlocks = [NSNotification.Name: ((Notification) -> Void)]()
+    var removedObservers = [Any]()
     
     func addObserver(forName name: NSNotification.Name?, object obj: Any?, queue: OperationQueue?, using block: @escaping (Notification) -> Void) -> NSObjectProtocol {
         
@@ -35,5 +36,9 @@ class ObserverReceiverSpy: ObserverReceiver {
         
         
         return NSObject()
+    }
+    
+    func removeObserver(_ observer: Any) {
+        removedObservers.append(observer)
     }
 }

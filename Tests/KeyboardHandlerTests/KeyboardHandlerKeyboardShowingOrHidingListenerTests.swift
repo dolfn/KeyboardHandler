@@ -31,7 +31,7 @@ class KeyboardHandlerKeyboardShowingOrHidingListenerTests: XCTestCase {
         super.tearDown()
     }
     
-    func test_StartListening_AddKeybordNotificationsTokens() {
+    func test_StartListeningForKeyboardEvents_AddKeybordNotificationsTokens() {
         XCTAssertEqual(observerReceiver.names.count, 4)
         XCTAssertEqual(observerReceiver.objs.count, 0)
         XCTAssertEqual(observerReceiver.blocks.count, 4)
@@ -62,4 +62,23 @@ class KeyboardHandlerKeyboardShowingOrHidingListenerTests: XCTestCase {
         XCTAssertEqual(constraint.constant, 250)
     }
     
+    func test_StopListeningForKeyboardEvents_RemoveAllTokensFromObserverReceiver() {
+        let addedObservers = sut.tokens!
+        var removedObserversFromAddedOnes = 0
+        sut.stopListeningForKeyboardEvents(in: observerReceiver)
+        XCTAssertEqual(observerReceiver.removedObservers.count, 4)
+        for anAddedObserver in addedObservers {
+            let found = observerReceiver.removedObservers.contains(where: { (anRemovedObserver) -> Bool in
+                if anRemovedObserver as AnyObject === anAddedObserver {
+                    return true
+                }
+                return false
+            })
+            
+            if found {
+                removedObserversFromAddedOnes += 1
+            }
+        }
+        XCTAssertEqual(removedObserversFromAddedOnes, 4)
+    }
 }

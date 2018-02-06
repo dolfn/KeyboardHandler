@@ -35,13 +35,12 @@ public extension KeyboardShowingOrHidingListener where Self: KeyboardHandler {
         
     }
     
-    public func stopListeningForKeyboardEvents(in: ObserverReceiver) {
-//        if let tokens = tokens {
-//            for token in tokens {
-//                NotificationCenter.default.removeObserver(token)
-//            }
-//        }
-//        tokens?.removeAll()
+    public func stopListeningForKeyboardEvents(in receiver: ObserverReceiver) {
+        if let tokens = tokens {
+            for token in tokens {
+                receiver.removeObserver(token)
+            }
+        }
     }
     
     
