@@ -20,10 +20,10 @@ class TapGestureRecognizerManager {
     }
     
     deinit {
-//        if let tapGestureRecognizer = tapGestureRecognizer {
-//            tapGestureRecognizer.removeTarget(self, action: #selector(TapGestureRecognizerManager.gestureRecognizerDidTap(_:)))
-//            viewToSetGestureRecognizerFor?.removeGestureRecognizer(tapGestureRecognizer)
-//        }
+        if let tapGestureRecognizer = tapGestureRecognizer {
+            tapGestureRecognizer.removeTarget(self, action: #selector(TapGestureRecognizerManager.gestureRecognizerDidTap(_:)))
+            viewToSetGestureRecognizerFor?.removeGestureRecognizer(tapGestureRecognizer)
+        }
     }
     
     func removeGestureRecognizer() {
