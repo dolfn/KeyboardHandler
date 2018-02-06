@@ -45,8 +45,12 @@ public class KeyboardHandlerForBottomConstraint: KeyboardHandler, KeyboardShowin
 //            tapGestureRecognizerManager = nil
 //        }
 //
-        if keyboardStatus == .willShow {
-            self.delegate?.willShowKeyboard(height: keyboardHeight)
+        switch keyboardStatus {
+        case .willShow:
+            delegate?.willShowKeyboard(height: keyboardHeight)
+        case .didShow:
+            delegate?.didShowKeyboard(height: keyboardHeight)
+        default: break
         }
     }
     
