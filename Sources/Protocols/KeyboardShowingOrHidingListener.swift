@@ -7,6 +7,6 @@ import Foundation
 
 public protocol KeyboardShowingOrHidingListener: class {
     var tokens: [AnyObject]? { get set }
-    func startListeningForShowingOrHidingTheKeyboard()
-    func stopListeningForShowingOrHidingKeyboard()
+    func startListeningForKeyboardEvents(in: ObserverReceiver)
+    func stopListeningForKeyboardEvents(in: ObserverReceiver)
 }

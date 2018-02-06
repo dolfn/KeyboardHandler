@@ -26,12 +26,5 @@ public class KeyboardHandlerForCenteringConstraint: KeyboardHandler, KeyboardSho
             break
         }
     }
-        
-    private func handleKeyboardNotification(_ notification: Notification, withKeyboardStatus keyboardStatus: KeyboardStatus) {
-//        if let userInfo = (notification as NSNotification).userInfo {
-//            let keyboardRect = (userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
-//            let keyboardHeight = keyboardRect!.height
-//            self.handleKeyboard(withHeight: keyboardHeight, keyboardStatus: keyboardStatus)
-//        }
-    }
+
 }
