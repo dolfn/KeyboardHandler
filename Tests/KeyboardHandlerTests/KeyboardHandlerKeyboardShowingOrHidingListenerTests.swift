@@ -11,10 +11,27 @@ import XCTest
 
 class KeyboardHandlerKeyboardShowingOrHidingListenerTests: XCTestCase {
     
-    func test_StartListening_AddKeybordNotificationsTokens() {
-        let sut = KeyboardHandlerForCenteringConstraint(constraint: NSLayoutConstraint())
-        let observerReceiver: ObserverReceiverSpy = ObserverReceiverSpy()
+    var constraint: NSLayoutConstraint!
+    var sut: KeyboardHandlerForCenteringConstraint!
+    var observerReceiver: ObserverReceiverSpy!
+
+    override func setUp() {
+        super.setUp()
+        constraint = NSLayoutConstraint()
+        constraint.constant = 100
+        sut = KeyboardHandlerForCenteringConstraint(constraint: constraint)
+        observerReceiver = ObserverReceiverSpy()
         sut.startListeningForKeyboardEvents(in: observerReceiver)
+    }
+    
+    override func tearDown() {
+        constraint = nil
+        sut = nil
+        observerReceiver = nil
+        super.tearDown()
+    }
+    
+    func test_StartListening_AddKeybordNotificationsTokens() {
         XCTAssertEqual(observerReceiver.names.count, 4)
         XCTAssertEqual(observerReceiver.objs.count, 0)
         XCTAssertEqual(observerReceiver.blocks.count, 4)
@@ -30,15 +47,19 @@ class KeyboardHandlerKeyboardShowingOrHidingListenerTests: XCTestCase {
     }
     
     func test_CallingWillShowKeyboardCompletion_ProvidesGivenKeyboardRectToDelegate() {
-        let constraint = NSLayoutConstraint()
-        constraint.constant = 100
-        let sut = KeyboardHandlerForCenteringConstraint(constraint: constraint)
-        let observerReceiver: ObserverReceiverSpy = ObserverReceiverSpy()
-        sut.startListeningForKeyboardEvents(in: observerReceiver)
         let function = observerReceiver.pairredNotificationsWithBlocks[NSNotification.Name.UIKeyboardWillShow]
         let userInfo = [UIKeyboardFrameEndUserInfoKey: CGRect(x: 0, y: 0, width: 400, height: 300)]
         let notification = Notification(name: NSNotification.Name.UIKeyboardWillShow, object: nil, userInfo: userInfo)
         function?(notification)
         XCTAssertEqual(constraint.constant, -50)
     }
+    
+    func test_CallingWillHideKeyboardCompletion_ProvidesGivenKeyboardRectToDelegate() {
+        let function = observerReceiver.pairredNotificationsWithBlocks[NSNotification.Name.UIKeyboardWillHide]
+        let userInfo = [UIKeyboardFrameEndUserInfoKey: CGRect(x: 0, y: 0, width: 400, height: 300)]
+        let notification = Notification(name: NSNotification.Name.UIKeyboardWillHide, object: nil, userInfo: userInfo)
+        function?(notification)
+        XCTAssertEqual(constraint.constant, 250)
+    }
+    
 }

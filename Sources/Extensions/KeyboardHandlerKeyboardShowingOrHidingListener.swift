@@ -23,8 +23,8 @@ public extension KeyboardShowingOrHidingListener where Self: KeyboardHandler {
         })
         tokens?.append(didShowToken)
         
-        let willHideToken = receiver.addObserver(forName: NSNotification.Name.UIKeyboardWillHide, object: nil, queue: OperationQueue.main, using: { (notification) in
-//            self.handleKeyboardNotification(notification, withKeyboardStatus: KeyboardStatus.willHide)
+        let willHideToken = receiver.addObserver(forName: NSNotification.Name.UIKeyboardWillHide, object: nil, queue: OperationQueue.main, using: { [weak self] (notification) in
+            self?.handleKeyboardNotification(notification, withKeyboardStatus: KeyboardStatus.willHide)
         })
         tokens?.append(willHideToken)
 
