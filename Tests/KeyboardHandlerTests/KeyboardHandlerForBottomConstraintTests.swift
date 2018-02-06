@@ -14,6 +14,8 @@ class KeyboardHandlerForBottomConstraintTests: XCTestCase {
     private var viewThatCanContainTextInputs: UIView?
     private var viewToDismissKeyboardOnTap: UIView?
     private var constraintToAnimate: NSLayoutConstraint!
+    private var viewsReferences = [UIView]()
+    private var tapGestureRecognizerManager: TapGestureRecognizerManager!
     private weak var weakSut: KeyboardHandlerForBottomConstraint?
     
     override func setUp() {
@@ -94,6 +96,22 @@ class KeyboardHandlerForBottomConstraintTests: XCTestCase {
         XCTAssertEqual(viewToDismissKeyboardOnTap!.gestureRecognizers!.count, 1)
         sut = nil
         XCTAssertEqual(viewToDismissKeyboardOnTap!.gestureRecognizers!.count, 0)
+    }
+    
+    func test_HandleUserTapFromViewWithTextFieldSubview_IsRemovingTapGesture() {
+        let textField = UITextFieldSpy()
+        let view = UIView()
+        view.addSubview(textField)
+        viewsReferences.append(view)
+        let view2 = UIView()
+        view2.addSubview(textField)
+        viewsReferences.append(view2)
+        sut = KeyboardHandlerForBottomConstraint(constraintToAnimate: constraintToAnimate, constraintOffset: 10, viewThatCanContainTextInputs: view2, viewToDismissKeyboardOnTap: view)
+        tapGestureRecognizerManager = TapGestureRecognizerManager(viewToSetGestureRecognizerFor: view)
+        XCTAssertEqual(view.gestureRecognizers!.count, 1)
+        sut.gestureRecognizerManagerDidTapOnView(tapGestureRecognizerManager!)
+        XCTAssertTrue(textField.resignFirstResponderCalled)
+        XCTAssertEqual(view.gestureRecognizers!.count, 0)
     }
     
 }

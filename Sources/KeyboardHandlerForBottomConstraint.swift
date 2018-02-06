@@ -21,7 +21,7 @@ public class KeyboardHandlerForBottomConstraint: KeyboardHandler, KeyboardShowin
     public init(constraintToAnimate: NSLayoutConstraint, constraintOffset: CGFloat, viewThatCanContainTextInputs: UIView?, viewToDismissKeyboardOnTap: UIView? = nil) {
         self.constraint = constraintToAnimate
         constraintDefaultConstant = constraintToAnimate.constant
-//        self.viewThatCanContainTextInputs = viewThatCanContainTextInputs
+        self.viewThatCanContainTextInputs = viewThatCanContainTextInputs
         self.viewToDismissKeyboardOnTap = viewToDismissKeyboardOnTap
         self.constraintOffset = constraintOffset
     }
@@ -47,25 +47,21 @@ public class KeyboardHandlerForBottomConstraint: KeyboardHandler, KeyboardShowin
     }
     
     func gestureRecognizerManagerDidTapOnView(_ tapGestureRecognizerManager: TapGestureRecognizerManager) {
-//        if let viewThatCanContainTextInputs = viewThatCanContainTextInputs {
-//            findActiveTextInput([viewThatCanContainTextInputs])
-//            activeTextInputView?.resignFirstResponder()
-//            tapGestureRecognizerManager.removeGestureRecognizer()
-//            self.tapGestureRecognizerManager = nil
-//        }
+        if let viewThatCanContainTextInputs = viewThatCanContainTextInputs {
+            findActiveTextInput(in: [viewThatCanContainTextInputs])
+            activeTextInputView?.resignFirstResponder()
+            tapGestureRecognizerManager.removeGestureRecognizer()
+            self.tapGestureRecognizerManager = nil
+        }
     }
     
-    private func findActiveTextInput(_ viewsToLookIntoForTextField: [UIView]) {
-//        for subview in viewsToLookIntoForTextField {
-//            if let textField = subview as? UITextField , textField.isFirstResponder {
-//                activeTextInputView = textField
-//            }
-//            else if let textView = subview as? UITextView , textView.isFirstResponder {
-//                activeTextInputView = textView
-//            }
-//            else {
-//                findActiveTextInput(subview.subviews)
-//            }
-//        }
+    private func findActiveTextInput(in views: [UIView]) {
+        for aView in views {
+            if let textField = aView as? UITextField, textField.isFirstResponder {
+                activeTextInputView = textField
+            } else {
+                findActiveTextInput(in: aView.subviews)
+            }
+        }
     }
 }
