@@ -13,26 +13,26 @@ class TapGestureRecognizerManager {
     weak var delegate: TapGestureRecognizerManagerDelegate?
     
     init(viewToSetGestureRecognizerFor: UIView) {
-        self.viewToSetGestureRecognizerFor = viewToSetGestureRecognizerFor
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(TapGestureRecognizerManager.gestureRecognizerDidTap(_:)))
-        viewToSetGestureRecognizerFor.addGestureRecognizer(tapGestureRecognizer)
-        self.tapGestureRecognizer = tapGestureRecognizer
+//        self.viewToSetGestureRecognizerFor = viewToSetGestureRecognizerFor
+//        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(TapGestureRecognizerManager.gestureRecognizerDidTap(_:)))
+//        viewToSetGestureRecognizerFor.addGestureRecognizer(tapGestureRecognizer)
+//        self.tapGestureRecognizer = tapGestureRecognizer
     }
     
     deinit {
-        if let tapGestureRecognizer = tapGestureRecognizer {
-            tapGestureRecognizer.removeTarget(self, action: #selector(TapGestureRecognizerManager.gestureRecognizerDidTap(_:)))
-            viewToSetGestureRecognizerFor?.removeGestureRecognizer(tapGestureRecognizer)
-        }
+//        if let tapGestureRecognizer = tapGestureRecognizer {
+//            tapGestureRecognizer.removeTarget(self, action: #selector(TapGestureRecognizerManager.gestureRecognizerDidTap(_:)))
+//            viewToSetGestureRecognizerFor?.removeGestureRecognizer(tapGestureRecognizer)
+//        }
     }
     
     func removeGestureRecognizer() {
-        if let tapGestureRecognizer = tapGestureRecognizer {
-            viewToSetGestureRecognizerFor?.removeGestureRecognizer(tapGestureRecognizer)
-        }
+//        if let tapGestureRecognizer = tapGestureRecognizer {
+//            viewToSetGestureRecognizerFor?.removeGestureRecognizer(tapGestureRecognizer)
+//        }
     }
     
     @objc func gestureRecognizerDidTap(_ tapGestureRecognizer: UITapGestureRecognizer) {
-        delegate?.gestureRecognizerManagerDidTapOnView(self)
+//        delegate?.gestureRecognizerManagerDidTapOnView(self)
     }
 }
