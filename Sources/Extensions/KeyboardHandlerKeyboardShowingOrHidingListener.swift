@@ -41,6 +41,7 @@ public extension KeyboardShowingOrHidingListener where Self: KeyboardHandler {
                 receiver.removeObserver(token)
             }
         }
+        tokens?.removeAll()
     }
     
     
