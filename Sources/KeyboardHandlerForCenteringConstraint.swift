@@ -24,6 +24,7 @@ public class KeyboardHandlerForCenteringConstraint: KeyboardHandler, KeyboardSho
             delegate?.willShowKeyboard(height: keyboardHeight)
         case .willHide:
             constraint?.constant += constraintOffsetValue
+            delegate?.willHideKeyboard(height: keyboardHeight)
         case .didShow:
             delegate?.didShowKeyboard(height: keyboardHeight)
         case .didHide:

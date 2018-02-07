@@ -78,6 +78,12 @@ class KeyboardHandlerKeyboardShowingOrHidingListenerTests: XCTestCase {
         XCTAssertTrue(delegate.didShowKeyboardCalled)
     }
     
+    func test_CallingWillHideKeyboardCompletion_CallsGivenDelegateWillHideKeyboardFunction() {
+        let function = observerReceiver.pairredNotificationsWithBlocks[NSNotification.Name.UIKeyboardWillHide]
+        function?(notification)
+        XCTAssertTrue(delegate.willHideKeyboardCalled)
+    }
+    
     func test_CallingDidHideKeyboardCompletion_CallsGivenDelegateDidHideKeyboardFunction() {
         let function = observerReceiver.pairredNotificationsWithBlocks[NSNotification.Name.UIKeyboardDidHide]
         function?(notification)
