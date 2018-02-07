@@ -91,15 +91,8 @@ class KeyboardHandlerForBottomConstraintTests: XCTestCase {
         XCTAssertEqual(constraintToAnimate.constant, 50)
     }
     
-    func test_CallingHandleKeybords_AddsTapGestureRecognizer() {
-        sut.handleKeyboard(withHeight: 100, keyboardStatus: .willShow)
-        XCTAssertNotNil(sut.tapGestureRecognizerManager)
-        XCTAssertEqual(viewToDismissKeyboardOnTap?.gestureRecognizers?.count, 1)
-        XCTAssertEqual(sut.tapGestureRecognizerManager?.viewToSetGestureRecognizerFor, viewToDismissKeyboardOnTap)
-    }
-    
     func test_DeallocatingSUT_IsRemovingTapGestureRecognizerFromGivenView() {
-        sut.handleKeyboard(withHeight: 100, keyboardStatus: .willShow)
+        sut.viewToDismissKeyboardOnTap = viewToDismissKeyboardOnTap
         sut = nil
         XCTAssertEqual(viewToDismissKeyboardOnTap?.gestureRecognizers?.count, 0)
     }
@@ -123,5 +116,11 @@ class KeyboardHandlerForBottomConstraintTests: XCTestCase {
         
         XCTAssertNil(sut.viewToDismissKeyboardOnTap)
         XCTAssertNil(sut.viewThatCanContainTextInputs)
+    }
+    
+    func test_GivenOtherViewControllerToHandleTaps_RecreateTapGestureRecognizerManager() {
+        firstTapGestureRecognizerManagerReference = sut.tapGestureRecognizerManager
+        sut.viewToDismissKeyboardOnTap = UIView()
+        XCTAssertFalse(firstTapGestureRecognizerManagerReference === sut.tapGestureRecognizerManager)
     }
 }

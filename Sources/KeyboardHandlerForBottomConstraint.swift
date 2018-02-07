@@ -12,7 +12,14 @@ public class KeyboardHandlerForBottomConstraint: KeyboardHandler, KeyboardShowin
     public var constraintOffset: CGFloat = 0
     public var tokens: [AnyObject]?
     public weak var viewThatCanContainTextInputs: UIView?
-    public weak var viewToDismissKeyboardOnTap: UIView?
+    public weak var viewToDismissKeyboardOnTap: UIView? {
+        didSet {
+            if let viewToDismissKeyboardOnTap = viewToDismissKeyboardOnTap {
+                tapGestureRecognizerManager = TapGestureRecognizerManager(viewToSetGestureRecognizerFor: viewToDismissKeyboardOnTap)
+                tapGestureRecognizerManager?.delegate = self
+            }
+        }
+    }
     public weak var delegate: KeyboardHandlerDelegate?
     
     private weak var constraint: NSLayoutConstraint?
@@ -27,11 +34,6 @@ public class KeyboardHandlerForBottomConstraint: KeyboardHandler, KeyboardShowin
     }
     
     public func handleKeyboard(withHeight keyboardHeight: CGFloat, keyboardStatus: KeyboardStatus) {
-        if tapGestureRecognizerManager == nil, let viewToDismissKeyboardOnTap = viewToDismissKeyboardOnTap {
-            tapGestureRecognizerManager = TapGestureRecognizerManager(viewToSetGestureRecognizerFor: viewToDismissKeyboardOnTap)
-            tapGestureRecognizerManager?.delegate = self
-        }
-
         switch keyboardStatus {
         case .willShow:
             delegate?.willShowKeyboard(height: keyboardHeight)
