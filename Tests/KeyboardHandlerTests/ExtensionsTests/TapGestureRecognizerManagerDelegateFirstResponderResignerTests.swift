@@ -60,4 +60,18 @@ class TapGestureRecognizerManagerDelegateFirstResponderResignerTests: XCTestCase
         XCTAssertTrue(textView.didCallResignFirstResponder)
     }
     
+    func test_RemoveTapGestureRecognizer_EvenIfNowFirstResponderSubviewFound() {
+        let view = UIView()
+        viewsReferences.append(view)
+        let view2 = UIView()
+        view2.addSubview(view)
+        viewsReferences.append(view2)
+        sut = TapGestureRecognizerManagerDelegateFirstResponderResignerMock()
+        sut.viewThatCanContainTextInputs = view2
+        tapGestureRecognizerManager = TapGestureRecognizerManager(viewToSetGestureRecognizerFor: view)
+        XCTAssertEqual(view.gestureRecognizers!.count, 1)
+        sut.gestureRecognizerManagerDidTapOnView(tapGestureRecognizerManager!)
+        XCTAssertEqual(view.gestureRecognizers!.count, 0)
+    }
+    
 }
