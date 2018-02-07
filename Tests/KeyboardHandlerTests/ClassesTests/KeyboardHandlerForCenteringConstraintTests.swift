@@ -82,4 +82,8 @@ class KeyboardHandlerForCenteringConstraintTests: XCTestCase {
         sut.viewToDismissKeyboardOnTap = UIView()
         XCTAssertFalse(firstTapGestureRecognizerManagerReference === sut.tapGestureRecognizerManager)
     }
+    
+    func test_AtAllocation_CreatedTapGestureRecognizerManagerForGivenView() {
+        XCTAssertNotNil(sut.tapGestureRecognizerManager)
+    }
 }
