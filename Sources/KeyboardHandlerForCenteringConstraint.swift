@@ -12,7 +12,7 @@ public class KeyboardHandlerForCenteringConstraint: KeyboardHandler, KeyboardSho
     public weak var delegate: KeyboardHandlerDelegate?
     private weak var constraint: NSLayoutConstraint?
     
-    init(constraint: NSLayoutConstraint?) {
+    public init(constraint: NSLayoutConstraint) {
         self.constraint = constraint
     }
     
