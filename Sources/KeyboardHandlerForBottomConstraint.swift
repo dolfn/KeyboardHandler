@@ -18,7 +18,7 @@ public class KeyboardHandlerForBottomConstraint: KeyboardHandler, KeyboardShowin
     private weak var viewThatCanContainTextInputs: UIView?
     private weak var activeTextInputView: UIView?
     
-    public init(constraintToAnimate: NSLayoutConstraint, constraintOffset: CGFloat, viewThatCanContainTextInputs: UIView?, viewToDismissKeyboardOnTap: UIView? = nil) {
+    public init(constraintToAnimate: NSLayoutConstraint, constraintOffset: CGFloat, viewThatCanContainTextInputs: UIView?, viewToDismissKeyboardOnTap: UIView?) {
         self.constraint = constraintToAnimate
         constraintDefaultConstant = constraintToAnimate.constant
         self.viewThatCanContainTextInputs = viewThatCanContainTextInputs
