@@ -172,4 +172,11 @@ class KeyboardHandlerForGivenConstraintTests: XCTestCase {
         sut.handleKeyboard(withHeight: 300, keyboardStatus: .willShow)
         XCTAssertEqual(constraintToAnimate.constant, 150)
     }
+    
+    func test_HavingCustomMultiplierAndConstraintOffsetCallingWillShowKeyboard_ChangeConstraintValueIncludingMultipler() {
+        sut = try! KeyboardHandlerForGivenConstraint(constraintToAnimate: constraintToAnimate, constraintOffset: 30, viewThatCanContainTextInputs: viewThatCanContainTextInputs!, viewToDismissKeyboardOnTap: viewToDismissKeyboardOnTap!, multiplier: 0.5)
+        sut.handleKeyboard(withHeight: 300, keyboardStatus: .willShow)
+        XCTAssertEqual(constraintToAnimate.constant, 180)
+    }
+    
 }
