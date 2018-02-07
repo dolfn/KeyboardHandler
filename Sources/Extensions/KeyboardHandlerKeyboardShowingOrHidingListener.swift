@@ -47,8 +47,15 @@ public extension KeyboardShowingOrHidingListener where Self: KeyboardHandler {
     
     private func handleKeyboardNotification(_ notification: Notification, withKeyboardStatus keyboardStatus: KeyboardStatus) {
         if let userInfo = notification.userInfo {
-            if let keyboardRect = userInfo[UIKeyboardFrameEndUserInfoKey] as? CGRect {
-                handleKeyboard(withHeight: keyboardRect.height, keyboardStatus: keyboardStatus)
+            switch keyboardStatus {
+            case .willShow, .didShow:
+                if let keyboardRect = userInfo[UIKeyboardFrameEndUserInfoKey] as? CGRect {
+                    handleKeyboard(withHeight: keyboardRect.height, keyboardStatus: keyboardStatus)
+                }
+            case .willHide, .didHide:
+                if let keyboardRect = userInfo[UIKeyboardFrameBeginUserInfoKey] as? CGRect {
+                    handleKeyboard(withHeight: keyboardRect.height, keyboardStatus: keyboardStatus)
+                }
             }
         }
     }
