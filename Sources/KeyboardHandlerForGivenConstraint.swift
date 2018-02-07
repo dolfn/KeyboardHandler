@@ -19,16 +19,18 @@ public class KeyboardHandlerForGivenConstraint: KeyboardHandler, KeyboardShowing
     }
     public weak var delegate: KeyboardHandlerDelegate?
     
+    private var multiplier: CGFloat
     private weak var constraint: NSLayoutConstraint?
     private weak var activeTextInputView: UIView?
     
-    public init(constraintToAnimate: NSLayoutConstraint, constraintOffset: CGFloat, viewThatCanContainTextInputs: UIView?, viewToDismissKeyboardOnTap: UIView?, multiplier: Float = 1.0) throws {
+    public init(constraintToAnimate: NSLayoutConstraint, constraintOffset: CGFloat, viewThatCanContainTextInputs: UIView?, viewToDismissKeyboardOnTap: UIView?, multiplier: CGFloat = 1.0) throws {
         
         if multiplier > 1.0 || multiplier <= 0 {
             throw KeyboardHandlerError.MultiplierNotValid
         }
         
         constraintDefaultConstant = constraintToAnimate.constant
+        self.multiplier = multiplier
         self.constraint = constraintToAnimate
         self.viewThatCanContainTextInputs = viewThatCanContainTextInputs
         self.viewToDismissKeyboardOnTap = viewToDismissKeyboardOnTap
@@ -39,7 +41,7 @@ public class KeyboardHandlerForGivenConstraint: KeyboardHandler, KeyboardShowing
         switch keyboardStatus {
         case .willShow:
             delegate?.willShowKeyboard(height: keyboardHeight)
-            constraint?.constant = keyboardHeight + constraintOffset
+            constraint?.constant = multiplier * keyboardHeight + constraintOffset
             createTapGestureRecognizerManager(for: viewToDismissKeyboardOnTap)
         case .didShow:
             delegate?.didShowKeyboard(height: keyboardHeight)
