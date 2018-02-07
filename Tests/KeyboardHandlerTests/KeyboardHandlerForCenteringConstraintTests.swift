@@ -30,8 +30,9 @@ class KeyboardHandlerForCenteringConstraintTests: XCTestCase {
     }
     
     func test_HidingKeyboard_DecreaseConstraintValueWithHalfOfTheKeyboardValue() {
+        constraint.constant = -200
         sut.handleKeyboard(withHeight: 600, keyboardStatus: .willHide)
-        XCTAssertEqual(constraint.constant, 400)
+        XCTAssertEqual(constraint.constant, 100)
     }
     
     func test_DidShowKeyboard_DoNotChangeTheValueOfConstraint() {
