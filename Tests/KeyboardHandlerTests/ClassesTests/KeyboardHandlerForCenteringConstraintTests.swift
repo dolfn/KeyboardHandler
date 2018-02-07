@@ -70,4 +70,17 @@ class KeyboardHandlerForCenteringConstraintTests: XCTestCase {
         secondTapGestureRecognizerManagerReference = sut.tapGestureRecognizerManager
         XCTAssertTrue(firstTapGestureRecognizerManagerReference === secondTapGestureRecognizerManagerReference)
     }
+    
+    func test_GivenUIViewsToSUT_AreKeepedAsWeekReferences() {
+        var viewThatCanContainTextInputs: UIView? = UIView()
+        sut.viewThatCanContainTextInputs = viewThatCanContainTextInputs
+        var viewToDismissKeyboardOnTap: UIView? = UIView()
+        sut.viewToDismissKeyboardOnTap = viewToDismissKeyboardOnTap
+        
+        viewThatCanContainTextInputs = nil
+        viewToDismissKeyboardOnTap = nil
+        
+        XCTAssertNil(sut.viewToDismissKeyboardOnTap)
+        XCTAssertNil(sut.viewThatCanContainTextInputs)
+    }
 }
