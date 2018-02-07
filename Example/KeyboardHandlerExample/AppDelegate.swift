@@ -1,8 +1,5 @@
 //
 //  AppDelegate.swift
-//  KeyboardHandlerExample
-//
-//  Created by Andrei Nastasiu on 07/02/2018.
 //  Copyright © 2018 Dolfn. All rights reserved.
 //
 
