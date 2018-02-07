@@ -14,10 +14,7 @@ public class KeyboardHandlerForBottomConstraint: KeyboardHandler, KeyboardShowin
     public weak var viewThatCanContainTextInputs: UIView?
     public weak var viewToDismissKeyboardOnTap: UIView? {
         didSet {
-            if let viewToDismissKeyboardOnTap = viewToDismissKeyboardOnTap {
-                tapGestureRecognizerManager = TapGestureRecognizerManager(viewToSetGestureRecognizerFor: viewToDismissKeyboardOnTap)
-                tapGestureRecognizerManager?.delegate = self
-            }
+            createTapGestureRecognizerManager(for: viewToDismissKeyboardOnTap)
         }
     }
     public weak var delegate: KeyboardHandlerDelegate?
@@ -26,11 +23,12 @@ public class KeyboardHandlerForBottomConstraint: KeyboardHandler, KeyboardShowin
     private weak var activeTextInputView: UIView?
     
     public init(constraintToAnimate: NSLayoutConstraint, constraintOffset: CGFloat, viewThatCanContainTextInputs: UIView?, viewToDismissKeyboardOnTap: UIView?) {
-        self.constraint = constraintToAnimate
         constraintDefaultConstant = constraintToAnimate.constant
+        self.constraint = constraintToAnimate
         self.viewThatCanContainTextInputs = viewThatCanContainTextInputs
         self.viewToDismissKeyboardOnTap = viewToDismissKeyboardOnTap
         self.constraintOffset = constraintOffset
+        createTapGestureRecognizerManager(for: viewToDismissKeyboardOnTap)
     }
     
     public func handleKeyboard(withHeight keyboardHeight: CGFloat, keyboardStatus: KeyboardStatus) {
@@ -45,6 +43,13 @@ public class KeyboardHandlerForBottomConstraint: KeyboardHandler, KeyboardShowin
             constraint?.constant = constraintDefaultConstant
         case .didHide:
             delegate?.didHideKeyboard(height: keyboardHeight)
+        }
+    }
+    
+    private func createTapGestureRecognizerManager(for view: UIView?) {
+        if let view = view {
+            tapGestureRecognizerManager = TapGestureRecognizerManager(viewToSetGestureRecognizerFor: view)
+            tapGestureRecognizerManager?.delegate = self
         }
     }
     

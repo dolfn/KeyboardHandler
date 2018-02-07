@@ -120,7 +120,11 @@ class KeyboardHandlerForBottomConstraintTests: XCTestCase {
     
     func test_GivenOtherViewControllerToHandleTaps_RecreateTapGestureRecognizerManager() {
         firstTapGestureRecognizerManagerReference = sut.tapGestureRecognizerManager
-        sut.viewToDismissKeyboardOnTap = UIView()
+        sut.viewToDismissKeyboardOnTap = viewThatCanContainTextInputs
         XCTAssertFalse(firstTapGestureRecognizerManagerReference === sut.tapGestureRecognizerManager)
+    }
+    
+    func test_AtAllocation_CreatedTapGestureRecognizerManagerForGivenView() {
+        XCTAssertNotNil(sut.tapGestureRecognizerManager)
     }
 }
