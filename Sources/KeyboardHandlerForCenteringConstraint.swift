@@ -9,6 +9,7 @@ import UIKit
 public class KeyboardHandlerForCenteringConstraint: KeyboardHandler, KeyboardShowingOrHidingListener {
     
     public var tokens: [AnyObject]?
+    public weak var delegate: KeyboardHandlerDelegate?
     private weak var constraint: NSLayoutConstraint?
     
     init(constraint: NSLayoutConstraint?) {
@@ -22,6 +23,8 @@ public class KeyboardHandlerForCenteringConstraint: KeyboardHandler, KeyboardSho
              constraint?.constant += -constraintOffsetValue
         case .willHide:
             constraint?.constant += constraintOffsetValue
+        case .didShow:
+            delegate?.didShowKeyboard(height: keyboardHeight)
         default:
             break
         }
