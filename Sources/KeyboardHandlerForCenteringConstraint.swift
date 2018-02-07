@@ -22,7 +22,7 @@ public class KeyboardHandlerForCenteringConstraint: KeyboardHandler, KeyboardSho
     }
     
     public func handleKeyboard(withHeight keyboardHeight: CGFloat, keyboardStatus: KeyboardStatus) {
-        if let viewToDismissKeyboardOnTap = viewToDismissKeyboardOnTap {
+        if tapGestureRecognizerManager == nil, let viewToDismissKeyboardOnTap = viewToDismissKeyboardOnTap {
             tapGestureRecognizerManager = TapGestureRecognizerManager(viewToSetGestureRecognizerFor: viewToDismissKeyboardOnTap)
             tapGestureRecognizerManager?.delegate = self
         }

@@ -11,7 +11,9 @@ class KeyboardHandlerForCenteringConstraintTests: XCTestCase {
     var constraint: NSLayoutConstraint!
     var sut: KeyboardHandlerForCenteringConstraint!
     var viewToDismissKeyboardOnTap: UIView!
-    
+    weak var firstTapGestureRecognizerManagerReference: TapGestureRecognizerManager?
+    weak var secondTapGestureRecognizerManagerReference: TapGestureRecognizerManager?
+        
     override func setUp() {
         super.setUp()
         constraint = NSLayoutConstraint()
@@ -59,5 +61,13 @@ class KeyboardHandlerForCenteringConstraintTests: XCTestCase {
         sut.handleKeyboard(withHeight: 100, keyboardStatus: .willShow)
         sut = nil
         XCTAssertEqual(viewToDismissKeyboardOnTap?.gestureRecognizers?.count, 0)
+    }
+    
+    func test_CallingHandleKeyboardMultipleTimes_UsesTheSameInstanceOfTapGestureRecognizerManager() {
+        sut.handleKeyboard(withHeight: 100, keyboardStatus: .willShow)
+        firstTapGestureRecognizerManagerReference = sut.tapGestureRecognizerManager
+        sut.handleKeyboard(withHeight: 100, keyboardStatus: .willShow)
+        secondTapGestureRecognizerManagerReference = sut.tapGestureRecognizerManager
+        XCTAssertTrue(firstTapGestureRecognizerManagerReference === secondTapGestureRecognizerManagerReference)
     }
 }
