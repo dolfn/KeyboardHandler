@@ -28,6 +28,7 @@
 		27E130D72028620D008BC0FF /* KeyboardShowingOrHidingListenerKeyboardHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27E130D62028620D008BC0FF /* KeyboardShowingOrHidingListenerKeyboardHandler.swift */; };
 		27E130DB2028624E008BC0FF /* TapGestureRecognizerManagerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27E130DA2028624E008BC0FF /* TapGestureRecognizerManagerDelegate.swift */; };
 		27E130DD2028625E008BC0FF /* TapGestureRecognizerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27E130DC2028625E008BC0FF /* TapGestureRecognizerManager.swift */; };
+		27FEB2FE202B59A00006BAC1 /* KeyboardHandlerError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27FEB2FD202B59A00006BAC1 /* KeyboardHandlerError.swift */; };
 		52D6D9871BEFF229002C0205 /* KeyboardHandler.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52D6D97C1BEFF229002C0205 /* KeyboardHandler.framework */; };
 		8933C7901EB5B82D000D00A4 /* KeyboardHandlerForGivenConstraintTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8933C7891EB5B82A000D00A4 /* KeyboardHandlerForGivenConstraintTests.swift */; };
 		A1CC39FB1FBC41D8006E91B4 /* KeyboardHandlerForGivenConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1CC39F81FBC41D8006E91B4 /* KeyboardHandlerForGivenConstraint.swift */; };
@@ -65,6 +66,7 @@
 		27E130DA2028624E008BC0FF /* TapGestureRecognizerManagerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapGestureRecognizerManagerDelegate.swift; sourceTree = "<group>"; };
 		27E130DC2028625E008BC0FF /* TapGestureRecognizerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapGestureRecognizerManager.swift; sourceTree = "<group>"; };
 		27E130DF202882AC008BC0FF /* KeyboardHandlerDelegateSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardHandlerDelegateSpy.swift; sourceTree = "<group>"; };
+		27FEB2FD202B59A00006BAC1 /* KeyboardHandlerError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardHandlerError.swift; sourceTree = "<group>"; };
 		52D6D97C1BEFF229002C0205 /* KeyboardHandler.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = KeyboardHandler.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		52D6D9861BEFF229002C0205 /* KeyboardHandler-iOS Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "KeyboardHandler-iOS Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8933C7891EB5B82A000D00A4 /* KeyboardHandlerForGivenConstraintTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardHandlerForGivenConstraintTests.swift; sourceTree = "<group>"; };
@@ -142,6 +144,7 @@
 			isa = PBXGroup;
 			children = (
 				27E130CD202861C1008BC0FF /* KeyboardStatus.swift */,
+				27FEB2FD202B59A00006BAC1 /* KeyboardHandlerError.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -371,6 +374,7 @@
 				2741E7002029DC070022EC32 /* ObserverReceiverSpy.swift in Sources */,
 				27E130D4202861E7008BC0FF /* KeyboardFirstResponder.swift in Sources */,
 				27E130DD2028625E008BC0FF /* TapGestureRecognizerManager.swift in Sources */,
+				27FEB2FE202B59A00006BAC1 /* KeyboardHandlerError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

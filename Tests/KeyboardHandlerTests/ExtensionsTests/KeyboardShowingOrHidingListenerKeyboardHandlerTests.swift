@@ -17,7 +17,7 @@ class KeyboardHandlerKeyboardShowingOrHidingListenerTests: XCTestCase {
         super.setUp()
         constraint = NSLayoutConstraint()
         constraint.constant = 100
-        sut = KeyboardHandlerForGivenConstraint(constraintToAnimate: constraint, constraintOffset: 0, viewThatCanContainTextInputs: UIView(), viewToDismissKeyboardOnTap: UIView())
+        sut = try! KeyboardHandlerForGivenConstraint(constraintToAnimate: constraint, constraintOffset: 0, viewThatCanContainTextInputs: UIView(), viewToDismissKeyboardOnTap: UIView())
         observerReceiver = ObserverReceiverSpy()
         sut.startListeningForKeyboardEvents(in: observerReceiver)
         delegate = KeyboardHandlerDelegateSpy()

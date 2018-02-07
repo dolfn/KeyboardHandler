@@ -25,7 +25,7 @@ class KeyboardHandlerForGivenConstraintTests: XCTestCase {
         constraintToAnimate.constant = 50
         viewThatCanContainTextInputs = UIView()
         viewToDismissKeyboardOnTap = UIView()
-        sut = KeyboardHandlerForGivenConstraint(constraintToAnimate: constraintToAnimate, constraintOffset: constraintOffset, viewThatCanContainTextInputs: viewThatCanContainTextInputs!, viewToDismissKeyboardOnTap: viewToDismissKeyboardOnTap!)
+        sut = try! KeyboardHandlerForGivenConstraint(constraintToAnimate: constraintToAnimate, constraintOffset: constraintOffset, viewThatCanContainTextInputs: viewThatCanContainTextInputs!, viewToDismissKeyboardOnTap: viewToDismissKeyboardOnTap!)
         weakSut = sut
         delegate = KeyboardHandlerDelegateSpy()
         sut.delegate = delegate
@@ -138,5 +138,14 @@ class KeyboardHandlerForGivenConstraintTests: XCTestCase {
     func test_WhenGivenNilWiewToDismissKeyboardOnTap_DeallocatedTapGestureRecognizerManager() {
         sut.viewToDismissKeyboardOnTap = nil
         XCTAssertNil(sut.tapGestureRecognizerManager)
+    }
+    
+    func test_IfGivenMultiplierIsBiggerThanOne_ThrowException() {
+        do {
+            try sut = KeyboardHandlerForGivenConstraint(constraintToAnimate: constraintToAnimate, constraintOffset: 0, viewThatCanContainTextInputs: viewThatCanContainTextInputs!, viewToDismissKeyboardOnTap: viewToDismissKeyboardOnTap!, multiplier: 1.1)
+            XCTFail()
+        } catch {
+            
+        }
     }
 }

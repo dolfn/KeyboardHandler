@@ -22,7 +22,12 @@ public class KeyboardHandlerForGivenConstraint: KeyboardHandler, KeyboardShowing
     private weak var constraint: NSLayoutConstraint?
     private weak var activeTextInputView: UIView?
     
-    public init(constraintToAnimate: NSLayoutConstraint, constraintOffset: CGFloat, viewThatCanContainTextInputs: UIView?, viewToDismissKeyboardOnTap: UIView?) {
+    public init(constraintToAnimate: NSLayoutConstraint, constraintOffset: CGFloat, viewThatCanContainTextInputs: UIView?, viewToDismissKeyboardOnTap: UIView?, multiplier: Float = 1.0) throws {
+        
+        if multiplier > 1.0 {
+            throw KeyboardHandlerError.MultiplierNotValid
+        }
+        
         constraintDefaultConstant = constraintToAnimate.constant
         self.constraint = constraintToAnimate
         self.viewThatCanContainTextInputs = viewThatCanContainTextInputs
