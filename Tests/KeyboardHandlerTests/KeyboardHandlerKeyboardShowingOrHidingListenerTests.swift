@@ -14,7 +14,8 @@ class KeyboardHandlerKeyboardShowingOrHidingListenerTests: XCTestCase {
     var constraint: NSLayoutConstraint!
     var sut: KeyboardHandlerForCenteringConstraint!
     var observerReceiver: ObserverReceiverSpy!
-
+    var delegate: KeyboardHandlerDelegateSpy!
+    
     override func setUp() {
         super.setUp()
         constraint = NSLayoutConstraint()
@@ -22,12 +23,15 @@ class KeyboardHandlerKeyboardShowingOrHidingListenerTests: XCTestCase {
         sut = KeyboardHandlerForCenteringConstraint(constraint: constraint)
         observerReceiver = ObserverReceiverSpy()
         sut.startListeningForKeyboardEvents(in: observerReceiver)
+        delegate = KeyboardHandlerDelegateSpy()
+        sut.delegate = delegate
     }
     
     override func tearDown() {
         constraint = nil
         sut = nil
         observerReceiver = nil
+        delegate = nil
         super.tearDown()
     }
     
@@ -63,13 +67,19 @@ class KeyboardHandlerKeyboardShowingOrHidingListenerTests: XCTestCase {
     }
     
     func test_CallingDidShowKeyboardCompletion_CallsGivenDelegateDidShowKeyboardFunction() {
-        let delegate = KeyboardHandlerDelegateSpy()
-        sut.delegate = delegate
         let function = observerReceiver.pairredNotificationsWithBlocks[NSNotification.Name.UIKeyboardDidShow]
         let userInfo = [UIKeyboardFrameEndUserInfoKey: CGRect(x: 0, y: 0, width: 400, height: 300)]
         let notification = Notification(name: NSNotification.Name.UIKeyboardWillHide, object: nil, userInfo: userInfo)
         function?(notification)
         XCTAssertTrue(delegate.didShowKeyboardCalled)
+    }
+    
+    func test_CallingDidHideKeyboardCompletion_CallsGivenDelegateDidHideKeyboardFunction() {
+        let function = observerReceiver.pairredNotificationsWithBlocks[NSNotification.Name.UIKeyboardDidHide]
+        let userInfo = [UIKeyboardFrameEndUserInfoKey: CGRect(x: 0, y: 0, width: 400, height: 300)]
+        let notification = Notification(name: NSNotification.Name.UIKeyboardWillHide, object: nil, userInfo: userInfo)
+        function?(notification)
+        XCTAssertTrue(delegate.didHideKeyboardCalled)
     }
     
     func test_StopListeningForKeyboardEvents_RemoveAllTokensFromObserverReceiver() {
