@@ -148,4 +148,13 @@ class KeyboardHandlerForGivenConstraintTests: XCTestCase {
             
         }
     }
+    
+    func test_IfGivenMultiplierIsEqualToZero_ThrowException() {
+        do {
+            try sut = KeyboardHandlerForGivenConstraint(constraintToAnimate: constraintToAnimate, constraintOffset: 0, viewThatCanContainTextInputs: viewThatCanContainTextInputs!, viewToDismissKeyboardOnTap: viewToDismissKeyboardOnTap!, multiplier: 0)
+            XCTFail()
+        } catch {
+            
+        }
+    }
 }

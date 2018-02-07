@@ -24,7 +24,7 @@ public class KeyboardHandlerForGivenConstraint: KeyboardHandler, KeyboardShowing
     
     public init(constraintToAnimate: NSLayoutConstraint, constraintOffset: CGFloat, viewThatCanContainTextInputs: UIView?, viewToDismissKeyboardOnTap: UIView?, multiplier: Float = 1.0) throws {
         
-        if multiplier > 1.0 {
+        if multiplier > 1.0 || multiplier == 0 {
             throw KeyboardHandlerError.MultiplierNotValid
         }
         
