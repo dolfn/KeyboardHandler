@@ -14,8 +14,6 @@ class KeyboardHandlerForBottomConstraintTests: XCTestCase {
     private var viewThatCanContainTextInputs: UIView?
     private var viewToDismissKeyboardOnTap: UIView?
     private var constraintToAnimate: NSLayoutConstraint!
-    private var viewsReferences = [UIView]()
-    private var tapGestureRecognizerManager: TapGestureRecognizerManager!
     private weak var weakSut: KeyboardHandlerForBottomConstraint?
     
     override func setUp() {
@@ -72,7 +70,7 @@ class KeyboardHandlerForBottomConstraintTests: XCTestCase {
         XCTAssertFalse(delegate.didShowKeyboardCalled)
         XCTAssertFalse(delegate.willHideKeyboardCalled)
         XCTAssertTrue(delegate.didHideKeyboardCalled)
-        XCTAssertEqual(delegate.receivedHeight!, 100)
+        XCTAssertEqual(delegate.receivedHeight, 100)
     }
     
     func test_DeallocationWhenSettingItselfAsDelegate_ToTapGestureRecognizerManager() {
@@ -91,47 +89,17 @@ class KeyboardHandlerForBottomConstraintTests: XCTestCase {
         XCTAssertEqual(constraintToAnimate.constant, 50)
     }
     
+    func test_CallingHandleKeybords_AddsTapGestureRecognizer() {
+        sut.handleKeyboard(withHeight: 100, keyboardStatus: .willShow)
+        XCTAssertNotNil(sut.tapGestureRecognizerManager)
+        XCTAssertEqual(viewToDismissKeyboardOnTap?.gestureRecognizers?.count, 1)
+        XCTAssertEqual(sut.tapGestureRecognizerManager?.viewToSetGestureRecognizerFor, viewToDismissKeyboardOnTap)
+    }
+    
     func test_DeallocatingSUT_IsRemovingTapGestureRecognizerFromGivenView() {
         sut.handleKeyboard(withHeight: 100, keyboardStatus: .willShow)
-        XCTAssertEqual(viewToDismissKeyboardOnTap!.gestureRecognizers!.count, 1)
         sut = nil
-        XCTAssertEqual(viewToDismissKeyboardOnTap!.gestureRecognizers!.count, 0)
-    }
-    
-    func test_HandleUserTapFromViewWithTextFieldSubview_IsRemovingTapGesture() {
-        let textField = UITextFieldSpy()
-        let view = UIView()
-        view.addSubview(textField)
-        viewsReferences.append(view)
-        let view2 = UIView()
-        view2.addSubview(textField)
-        viewsReferences.append(view2)
-        sut = KeyboardHandlerForBottomConstraint(constraintToAnimate: constraintToAnimate, constraintOffset: 10, viewThatCanContainTextInputs: view2, viewToDismissKeyboardOnTap: view)
-        tapGestureRecognizerManager = TapGestureRecognizerManager(viewToSetGestureRecognizerFor: view)
-        XCTAssertEqual(view.gestureRecognizers!.count, 1)
-        sut.gestureRecognizerManagerDidTapOnView(tapGestureRecognizerManager!)
-        XCTAssertTrue(textField.resignFirstResponderCalled)
-        XCTAssertEqual(view.gestureRecognizers!.count, 0)
-        XCTAssertTrue(textField.didAskIfItIsFirstResponder)
-    }
-    
-    func test_HandleUserTapFromViewWithTextViewSubview_IsRemovingTapGesture() {
-        let textView = UITextViewSpy()
-        let view = UIView()
-        view.addSubview(textView)
-        viewsReferences.append(view)
-        let view2 = UIView()
-        view2.addSubview(textView)
-        viewsReferences.append(view2)
-        sut = KeyboardHandlerForBottomConstraint(constraintToAnimate: constraintToAnimate, constraintOffset: 10, viewThatCanContainTextInputs: view2, viewToDismissKeyboardOnTap: view)
-        tapGestureRecognizerManager = TapGestureRecognizerManager(viewToSetGestureRecognizerFor: view)
-        XCTAssertEqual(view.gestureRecognizers!.count, 1)
-        textView.shouldExpectTheFunctionCall = true
-        sut.gestureRecognizerManagerDidTapOnView(tapGestureRecognizerManager!)
-        textView.shouldExpectTheFunctionCall = false
-        XCTAssertEqual(view.gestureRecognizers!.count, 0)
-        XCTAssertTrue(textView.didAskIfItIsFirstResponder)
-        XCTAssertTrue(textView.didCallResignFirstResponder)
+        XCTAssertEqual(viewToDismissKeyboardOnTap?.gestureRecognizers?.count, 0)
     }
     
 }

@@ -10,17 +10,20 @@ class KeyboardHandlerForCenteringConstraintTests: XCTestCase {
     
     var constraint: NSLayoutConstraint!
     var sut: KeyboardHandlerForCenteringConstraint!
+    var viewToDismissKeyboardOnTap: UIView!
     
     override func setUp() {
         super.setUp()
         constraint = NSLayoutConstraint()
         constraint.constant = 100
-        sut = KeyboardHandlerForCenteringConstraint(constraint: constraint)
+        viewToDismissKeyboardOnTap = UIView()
+        sut = KeyboardHandlerForCenteringConstraint(constraint: constraint, viewThatCanContainTextInputs: UIView(), viewToDismissKeyboardOnTap: viewToDismissKeyboardOnTap)
     }
     
     override func tearDown() {
         constraint = nil
         sut = nil
+        viewToDismissKeyboardOnTap = nil
         super.tearDown()
     }
     
@@ -43,5 +46,18 @@ class KeyboardHandlerForCenteringConstraintTests: XCTestCase {
     func test_DidHideKeyboard_DoNotChangeTheValueOfConstraint() {
         sut.handleKeyboard(withHeight: 600, keyboardStatus: .didHide)
         XCTAssertEqual(constraint.constant, 100)
+    }
+    
+    func test_CallingHandleKeybords_AddsTapGestureRecognizer() {
+        sut.handleKeyboard(withHeight: 100, keyboardStatus: .willShow)
+        XCTAssertNotNil(sut.tapGestureRecognizerManager)
+        XCTAssertEqual(viewToDismissKeyboardOnTap?.gestureRecognizers?.count, 1)
+        XCTAssertEqual(sut.tapGestureRecognizerManager?.viewToSetGestureRecognizerFor, viewToDismissKeyboardOnTap)
+    }
+    
+    func test_DeallocatingSUT_IsRemovingTapGestureRecognizerFromGivenView() {
+        sut.handleKeyboard(withHeight: 100, keyboardStatus: .willShow)
+        sut = nil
+        XCTAssertEqual(viewToDismissKeyboardOnTap?.gestureRecognizers?.count, 0)
     }
 }

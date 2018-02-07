@@ -6,17 +6,27 @@
 import Foundation
 import UIKit
 
-public class KeyboardHandlerForCenteringConstraint: KeyboardHandler, KeyboardShowingOrHidingListener {
+public class KeyboardHandlerForCenteringConstraint: KeyboardHandler, KeyboardShowingOrHidingListener, TapGestureRecognizerManagerDelegate, FirstResponderResigner {
     
+    var tapGestureRecognizerManager: TapGestureRecognizerManager?
     public var tokens: [AnyObject]?
+    public var viewThatCanContainTextInputs: UIView?
     public weak var delegate: KeyboardHandlerDelegate?
+    private weak var viewToDismissKeyboardOnTap: UIView?
     private weak var constraint: NSLayoutConstraint?
     
-    public init(constraint: NSLayoutConstraint) {
+    public init(constraint: NSLayoutConstraint, viewThatCanContainTextInputs: UIView?, viewToDismissKeyboardOnTap: UIView?) {
         self.constraint = constraint
+        self.viewThatCanContainTextInputs = viewThatCanContainTextInputs
+        self.viewToDismissKeyboardOnTap = viewToDismissKeyboardOnTap
     }
     
     public func handleKeyboard(withHeight keyboardHeight: CGFloat, keyboardStatus: KeyboardStatus) {
+        if let viewToDismissKeyboardOnTap = viewToDismissKeyboardOnTap {
+            tapGestureRecognizerManager = TapGestureRecognizerManager(viewToSetGestureRecognizerFor: viewToDismissKeyboardOnTap)
+            tapGestureRecognizerManager?.delegate = self
+        }
+        
         let constraintOffsetValue = keyboardHeight / 2.0
         switch keyboardStatus {
         case .willShow:

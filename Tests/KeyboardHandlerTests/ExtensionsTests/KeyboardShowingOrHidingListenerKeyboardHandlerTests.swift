@@ -12,12 +12,12 @@ class KeyboardHandlerKeyboardShowingOrHidingListenerTests: XCTestCase {
     var sut: KeyboardHandlerForCenteringConstraint!
     var observerReceiver: ObserverReceiverSpy!
     var delegate: KeyboardHandlerDelegateSpy!
-    
+
     override func setUp() {
         super.setUp()
         constraint = NSLayoutConstraint()
         constraint.constant = 100
-        sut = KeyboardHandlerForCenteringConstraint(constraint: constraint)
+        sut = KeyboardHandlerForCenteringConstraint(constraint: constraint, viewThatCanContainTextInputs: UIView(), viewToDismissKeyboardOnTap: UIView())
         observerReceiver = ObserverReceiverSpy()
         sut.startListeningForKeyboardEvents(in: observerReceiver)
         delegate = KeyboardHandlerDelegateSpy()
