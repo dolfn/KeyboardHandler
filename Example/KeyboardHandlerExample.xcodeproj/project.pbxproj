@@ -14,6 +14,7 @@
 		2753C8EC202AF01200811522 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2753C8EA202AF01200811522 /* LaunchScreen.storyboard */; };
 		27C86A70202AF1590034AA3E /* KeyboardHandler.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27C86A71202AF1590034AA3E /* KeyboardHandler.framework */; };
 		27C86A73202AF6E30034AA3E /* ViewControllerWithTextViewAndBottomConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C86A72202AF6E30034AA3E /* ViewControllerWithTextViewAndBottomConstraint.swift */; };
+		27C86A75202AF9690034AA3E /* ViewControllerWithTextFieldAndCenterConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27C86A74202AF9690034AA3E /* ViewControllerWithTextFieldAndCenterConstraint.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		2753C8ED202AF01200811522 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		27C86A71202AF1590034AA3E /* KeyboardHandler.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = KeyboardHandler.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		27C86A72202AF6E30034AA3E /* ViewControllerWithTextViewAndBottomConstraint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerWithTextViewAndBottomConstraint.swift; sourceTree = "<group>"; };
+		27C86A74202AF9690034AA3E /* ViewControllerWithTextFieldAndCenterConstraint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerWithTextFieldAndCenterConstraint.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +65,7 @@
 				2753C8E1202AF01200811522 /* AppDelegate.swift */,
 				2753C8E3202AF01200811522 /* ViewControllerWithTextFieldAndBottomConstraint.swift */,
 				27C86A72202AF6E30034AA3E /* ViewControllerWithTextViewAndBottomConstraint.swift */,
+				27C86A74202AF9690034AA3E /* ViewControllerWithTextFieldAndCenterConstraint.swift */,
 				2753C8E5202AF01200811522 /* Main.storyboard */,
 				2753C8E8202AF01200811522 /* Assets.xcassets */,
 				2753C8EA202AF01200811522 /* LaunchScreen.storyboard */,
@@ -151,6 +154,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				27C86A75202AF9690034AA3E /* ViewControllerWithTextFieldAndCenterConstraint.swift in Sources */,
 				27C86A73202AF6E30034AA3E /* ViewControllerWithTextViewAndBottomConstraint.swift in Sources */,
 				2753C8E4202AF01200811522 /* ViewControllerWithTextFieldAndBottomConstraint.swift in Sources */,
 				2753C8E2202AF01200811522 /* AppDelegate.swift in Sources */,
