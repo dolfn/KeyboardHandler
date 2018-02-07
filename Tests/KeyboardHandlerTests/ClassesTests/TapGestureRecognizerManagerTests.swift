@@ -10,8 +10,8 @@ import XCTest
 
 class TapGestureRecognizerManagerTests: XCTestCase {
     
-    var sut: TapGestureRecognizerManager!
-    var view: UIView!
+    private var sut: TapGestureRecognizerManager!
+    private var view: UIView!
     
     override func setUp() {
         super.setUp()

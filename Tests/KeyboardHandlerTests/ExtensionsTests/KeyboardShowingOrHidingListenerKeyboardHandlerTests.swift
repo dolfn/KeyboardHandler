@@ -8,10 +8,10 @@ import XCTest
 
 class KeyboardHandlerKeyboardShowingOrHidingListenerTests: XCTestCase {
     
-    var constraint: NSLayoutConstraint!
-    var sut: KeyboardHandlerForCenteringConstraint!
-    var observerReceiver: ObserverReceiverSpy!
-    var delegate: KeyboardHandlerDelegateSpy!
+    private var constraint: NSLayoutConstraint!
+    private var sut: KeyboardHandlerForCenteringConstraint!
+    private var observerReceiver: ObserverReceiverSpy!
+    private var delegate: KeyboardHandlerDelegateSpy!
 
     override func setUp() {
         super.setUp()

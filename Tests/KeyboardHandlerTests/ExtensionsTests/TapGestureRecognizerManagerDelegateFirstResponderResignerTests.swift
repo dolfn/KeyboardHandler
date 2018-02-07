@@ -8,7 +8,7 @@ import XCTest
 
 class TapGestureRecognizerManagerDelegateFirstResponderResignerTests: XCTestCase {
     
-    var sut: TapGestureRecognizerManagerDelegateFirstResponderResignerMock!
+    private var sut: TapGestureRecognizerManagerDelegateFirstResponderResignerMock!
     private var viewsReferences = [UIView]()
     private var tapGestureRecognizerManager: TapGestureRecognizerManager!
     
