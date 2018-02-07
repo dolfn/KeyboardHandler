@@ -127,4 +127,9 @@ class KeyboardHandlerForBottomConstraintTests: XCTestCase {
     func test_AtAllocation_CreatedTapGestureRecognizerManagerForGivenView() {
         XCTAssertNotNil(sut.tapGestureRecognizerManager)
     }
+    
+    func test_WhenGivenNilWiewToDismissKeyboardOnTap_DeallocatedTapGestureRecognizerManager() {
+        sut.viewToDismissKeyboardOnTap = nil
+        XCTAssertNil(sut.tapGestureRecognizerManager)
+    }
 }
