@@ -10,9 +10,10 @@ public class KeyboardHandlerForCenteringConstraint: KeyboardHandler, KeyboardSho
     
     var tapGestureRecognizerManager: TapGestureRecognizerManager?
     public var tokens: [AnyObject]?
-    public var viewThatCanContainTextInputs: UIView?
+    public weak var viewThatCanContainTextInputs: UIView?
+    public weak var viewToDismissKeyboardOnTap: UIView?
     public weak var delegate: KeyboardHandlerDelegate?
-    private weak var viewToDismissKeyboardOnTap: UIView?
+    
     private weak var constraint: NSLayoutConstraint?
     
     public init(constraint: NSLayoutConstraint, viewThatCanContainTextInputs: UIView?, viewToDismissKeyboardOnTap: UIView?) {

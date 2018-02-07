@@ -8,7 +8,8 @@ import UIKit
 
 class TapGestureRecognizerManagerDelegateFirstResponderResignerMock: TapGestureRecognizerManagerDelegate, FirstResponderResigner {
     
-    var viewThatCanContainTextInputs: UIView?
+    weak var viewToDismissKeyboardOnTap: UIView?
+    weak var viewThatCanContainTextInputs: UIView?
     var tapGestureRecognizerManager: TapGestureRecognizerManager?
     
 }

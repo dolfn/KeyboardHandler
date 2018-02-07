@@ -12,10 +12,10 @@ public class KeyboardHandlerForBottomConstraint: KeyboardHandler, KeyboardShowin
     public var constraintOffset: CGFloat = 0
     public var tokens: [AnyObject]?
     public weak var viewThatCanContainTextInputs: UIView?
+    public weak var viewToDismissKeyboardOnTap: UIView?
     public weak var delegate: KeyboardHandlerDelegate?
     
     private weak var constraint: NSLayoutConstraint?
-    private weak var viewToDismissKeyboardOnTap: UIView?
     private weak var activeTextInputView: UIView?
     
     public init(constraintToAnimate: NSLayoutConstraint, constraintOffset: CGFloat, viewThatCanContainTextInputs: UIView?, viewToDismissKeyboardOnTap: UIView?) {

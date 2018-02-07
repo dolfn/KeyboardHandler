@@ -7,6 +7,9 @@ import Foundation
 import UIKit
 
 protocol FirstResponderResigner: class {
-    var viewThatCanContainTextInputs: UIView? { get }
+    
+    weak var viewThatCanContainTextInputs: UIView? { get }
+    weak var viewToDismissKeyboardOnTap: UIView? { get }
     var tapGestureRecognizerManager: TapGestureRecognizerManager? { get set }
+    
 }
