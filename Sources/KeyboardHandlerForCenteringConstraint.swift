@@ -47,6 +47,8 @@ public class KeyboardHandlerForCenteringConstraint: KeyboardHandler, KeyboardSho
         if let view = view {
             tapGestureRecognizerManager = TapGestureRecognizerManager(viewToSetGestureRecognizerFor: view)
             tapGestureRecognizerManager?.delegate = self
+        } else {
+            tapGestureRecognizerManager = nil
         }
     }
 
