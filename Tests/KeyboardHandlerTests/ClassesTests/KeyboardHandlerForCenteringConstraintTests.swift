@@ -11,8 +11,8 @@ class KeyboardHandlerForCenteringConstraintTests: XCTestCase {
     private var constraint: NSLayoutConstraint!
     private var sut: KeyboardHandlerForCenteringConstraint!
     private var viewToDismissKeyboardOnTap: UIView!
-    private weak var firstTapGestureRecognizerManagerReference: TapGestureRecognizerManager?
-    private weak var secondTapGestureRecognizerManagerReference: TapGestureRecognizerManager?
+    private weak var firstTapGestureRecognizerManagerReference: TapGestureRecognizerManager!
+    private weak var secondTapGestureRecognizerManagerReference: TapGestureRecognizerManager!
         
     override func setUp() {
         super.setUp()

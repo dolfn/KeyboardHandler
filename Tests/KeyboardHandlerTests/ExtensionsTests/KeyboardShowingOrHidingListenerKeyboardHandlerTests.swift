@@ -96,7 +96,11 @@ class KeyboardHandlerKeyboardShowingOrHidingListenerTests: XCTestCase {
     }
     
     func test_StopListeningForKeyboardEvents_RemoveAllTokensFromObserverReceiver() {
-        let addedObservers = sut.tokens!
+        guard let addedObservers = sut.tokens else {
+            XCTFail()
+            return
+        }
+        
         var removedObserversFromAddedOnes = 0
         sut.stopListeningForKeyboardEvents(in: observerReceiver)
         XCTAssertEqual(observerReceiver.removedObservers.count, 4)
@@ -117,6 +121,6 @@ class KeyboardHandlerKeyboardShowingOrHidingListenerTests: XCTestCase {
     
     func test_StopListeningForKeyboardEvents_RemoveAllTokensFromSUT() {
         sut.stopListeningForKeyboardEvents(in: observerReceiver)
-        XCTAssertEqual(sut.tokens!.count, 0)
+        XCTAssertEqual(sut.tokens?.count, 0)
     }
 }

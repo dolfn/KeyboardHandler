@@ -33,10 +33,10 @@ class TapGestureRecognizerManagerDelegateFirstResponderResignerTests: XCTestCase
         sut = TapGestureRecognizerManagerDelegateFirstResponderResignerMock()
         sut.viewThatCanContainTextInputs = view2
         tapGestureRecognizerManager = TapGestureRecognizerManager(viewToSetGestureRecognizerFor: view)
-        XCTAssertEqual(view.gestureRecognizers!.count, 1)
+        XCTAssertEqual(view.gestureRecognizers?.count, 1)
         sut.gestureRecognizerManagerDidTapOnView(tapGestureRecognizerManager!)
         XCTAssertTrue(textField.resignFirstResponderCalled)
-        XCTAssertEqual(view.gestureRecognizers!.count, 0)
+        XCTAssertEqual(view.gestureRecognizers?.count, 0)
         XCTAssertTrue(textField.didAskIfItIsFirstResponder)
     }
     
@@ -51,11 +51,11 @@ class TapGestureRecognizerManagerDelegateFirstResponderResignerTests: XCTestCase
         sut = TapGestureRecognizerManagerDelegateFirstResponderResignerMock()
         sut.viewThatCanContainTextInputs = view2
         tapGestureRecognizerManager = TapGestureRecognizerManager(viewToSetGestureRecognizerFor: view)
-        XCTAssertEqual(view.gestureRecognizers!.count, 1)
+        XCTAssertEqual(view.gestureRecognizers?.count, 1)
         textView.shouldExpectTheFunctionCall = true
         sut.gestureRecognizerManagerDidTapOnView(tapGestureRecognizerManager!)
         textView.shouldExpectTheFunctionCall = false
-        XCTAssertEqual(view.gestureRecognizers!.count, 0)
+        XCTAssertEqual(view.gestureRecognizers?.count, 0)
         XCTAssertTrue(textView.didAskIfItIsFirstResponder)
         XCTAssertTrue(textView.didCallResignFirstResponder)
     }
@@ -69,9 +69,9 @@ class TapGestureRecognizerManagerDelegateFirstResponderResignerTests: XCTestCase
         sut = TapGestureRecognizerManagerDelegateFirstResponderResignerMock()
         sut.viewThatCanContainTextInputs = view2
         tapGestureRecognizerManager = TapGestureRecognizerManager(viewToSetGestureRecognizerFor: view)
-        XCTAssertEqual(view.gestureRecognizers!.count, 1)
+        XCTAssertEqual(view.gestureRecognizers?.count, 1)
         sut.gestureRecognizerManagerDidTapOnView(tapGestureRecognizerManager!)
-        XCTAssertEqual(view.gestureRecognizers!.count, 0)
+        XCTAssertEqual(view.gestureRecognizers?.count, 0)
     }
     
 }

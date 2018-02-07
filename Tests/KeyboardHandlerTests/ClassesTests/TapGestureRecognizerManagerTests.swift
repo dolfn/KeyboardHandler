@@ -37,21 +37,21 @@ class TapGestureRecognizerManagerTests: XCTestCase {
     
     func test_AtInitialization_IsAddingTapGestureForGivenView() {
         wait(for: 0.1)
-        XCTAssertEqual(view.gestureRecognizers!.count, 1)
-        let gestureRecognizer = view.gestureRecognizers!.first
+        XCTAssertEqual(view.gestureRecognizers?.count, 1)
+        let gestureRecognizer = view.gestureRecognizers?.first
         XCTAssertTrue(gestureRecognizer is UITapGestureRecognizer)
     }
     
     func test_AtDellocation_IsRemovingTapGestureForGivenView() {
         wait(for: 0.1)
         sut = nil
-        XCTAssertEqual(view.gestureRecognizers!.count, 0)
+        XCTAssertEqual(view.gestureRecognizers?.count, 0)
     }
     
     func test_WhenCallingRemoveTapGesture_RemoveTapGestureFromGivenView() {
         wait(for: 0.1)
         sut.removeGestureRecognizer()
-        XCTAssertEqual(view.gestureRecognizers!.count, 0)
+        XCTAssertEqual(view.gestureRecognizers?.count, 0)
     }
     
     func test_HandleDidTapFunction_WillCallTheDelegateFunction() {
