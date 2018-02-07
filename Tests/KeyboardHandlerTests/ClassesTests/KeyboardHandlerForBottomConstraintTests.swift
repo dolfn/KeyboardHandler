@@ -15,6 +15,8 @@ class KeyboardHandlerForBottomConstraintTests: XCTestCase {
     private var viewToDismissKeyboardOnTap: UIView?
     private var constraintToAnimate: NSLayoutConstraint!
     private weak var weakSut: KeyboardHandlerForBottomConstraint?
+    private weak var firstTapGestureRecognizerManagerReference: TapGestureRecognizerManager?
+    private weak var secondTapGestureRecognizerManagerReference: TapGestureRecognizerManager?
     
     override func setUp() {
         super.setUp()
@@ -100,6 +102,14 @@ class KeyboardHandlerForBottomConstraintTests: XCTestCase {
         sut.handleKeyboard(withHeight: 100, keyboardStatus: .willShow)
         sut = nil
         XCTAssertEqual(viewToDismissKeyboardOnTap?.gestureRecognizers?.count, 0)
+    }
+    
+    func test_CallingHandleKeyboardMultipleTimes_UsesTheSameInstanceOfTapGestureRecognizerManager() {
+        sut.handleKeyboard(withHeight: 100, keyboardStatus: .willShow)
+        firstTapGestureRecognizerManagerReference = sut.tapGestureRecognizerManager
+        sut.handleKeyboard(withHeight: 100, keyboardStatus: .willShow)
+        secondTapGestureRecognizerManagerReference = sut.tapGestureRecognizerManager
+        XCTAssertTrue(firstTapGestureRecognizerManagerReference === secondTapGestureRecognizerManagerReference)
     }
     
 }
