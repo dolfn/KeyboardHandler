@@ -20,7 +20,8 @@ public class KeyboardHandlerForCenteringConstraint: KeyboardHandler, KeyboardSho
         let constraintOffsetValue = keyboardHeight / 2.0
         switch keyboardStatus {
         case .willShow:
-             constraint?.constant += -constraintOffsetValue
+            constraint?.constant += -constraintOffsetValue
+            delegate?.willShowKeyboard(height: keyboardHeight)
         case .willHide:
             constraint?.constant += constraintOffsetValue
         case .didShow:
