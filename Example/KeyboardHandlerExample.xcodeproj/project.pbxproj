@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		270F9C39202B1A960097CAEC /* ViewControllerWithTextViewAndCenterConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 270F9C38202B1A960097CAEC /* ViewControllerWithTextViewAndCenterConstraint.swift */; };
 		2753C8E2202AF01200811522 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2753C8E1202AF01200811522 /* AppDelegate.swift */; };
 		2753C8E4202AF01200811522 /* ViewControllerWithTextFieldAndBottomConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2753C8E3202AF01200811522 /* ViewControllerWithTextFieldAndBottomConstraint.swift */; };
 		2753C8E7202AF01200811522 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2753C8E5202AF01200811522 /* Main.storyboard */; };
@@ -18,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		270F9C38202B1A960097CAEC /* ViewControllerWithTextViewAndCenterConstraint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerWithTextViewAndCenterConstraint.swift; sourceTree = "<group>"; };
 		2753C8DE202AF01200811522 /* KeyboardHandlerExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KeyboardHandlerExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2753C8E1202AF01200811522 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2753C8E3202AF01200811522 /* ViewControllerWithTextFieldAndBottomConstraint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerWithTextFieldAndBottomConstraint.swift; sourceTree = "<group>"; };
@@ -66,6 +68,7 @@
 				2753C8E3202AF01200811522 /* ViewControllerWithTextFieldAndBottomConstraint.swift */,
 				27C86A72202AF6E30034AA3E /* ViewControllerWithTextViewAndBottomConstraint.swift */,
 				27C86A74202AF9690034AA3E /* ViewControllerWithTextFieldAndCenterConstraint.swift */,
+				270F9C38202B1A960097CAEC /* ViewControllerWithTextViewAndCenterConstraint.swift */,
 				2753C8E5202AF01200811522 /* Main.storyboard */,
 				2753C8E8202AF01200811522 /* Assets.xcassets */,
 				2753C8EA202AF01200811522 /* LaunchScreen.storyboard */,
@@ -157,6 +160,7 @@
 				27C86A75202AF9690034AA3E /* ViewControllerWithTextFieldAndCenterConstraint.swift in Sources */,
 				27C86A73202AF6E30034AA3E /* ViewControllerWithTextViewAndBottomConstraint.swift in Sources */,
 				2753C8E4202AF01200811522 /* ViewControllerWithTextFieldAndBottomConstraint.swift in Sources */,
+				270F9C39202B1A960097CAEC /* ViewControllerWithTextViewAndCenterConstraint.swift in Sources */,
 				2753C8E2202AF01200811522 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
