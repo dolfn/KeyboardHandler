@@ -74,4 +74,41 @@ class TapGestureRecognizerManagerDelegateFirstResponderResignerTests: XCTestCase
         XCTAssertEqual(view.gestureRecognizers?.count, 0)
     }
     
+    func test_FindFirstResponderView_InAComplexHierarcy() {
+        let view1 = UIView()
+        viewsReferences.append(view1)
+        let view2 = UIView()
+        viewsReferences.append(view2)
+        let view3 = UIView()
+        viewsReferences.append(view3)
+        view3.addSubview(view2)
+        view2.addSubview(view1)
+        
+        
+        let view4 = UIView()
+        viewsReferences.append(view4)
+        let view5 = UIView()
+        viewsReferences.append(view5)
+        let view6 = UIView()
+        viewsReferences.append(view6)
+        view6.addSubview(view5)
+        view5.addSubview(view4)
+        
+        let textView = UITextViewSpy()
+        view2.addSubview(textView)
+        
+        let containerView = UIView()
+        viewsReferences.append(containerView)
+        containerView.addSubview(view3)
+        containerView.addSubview(view6)
+        
+        sut = TapGestureRecognizerManagerDelegateFirstResponderResignerMock()
+        sut.viewThatCanContainTextInputs = containerView
+        textView.shouldExpectTheFunctionCall = true
+        tapGestureRecognizerManager = TapGestureRecognizerManager(viewToSetGestureRecognizerFor: containerView)
+        sut.gestureRecognizerManagerDidTapOnView(tapGestureRecognizerManager!)
+        textView.shouldExpectTheFunctionCall = false
+        XCTAssertTrue(textView.didCallResignFirstResponder)
+    }
+    
 }
