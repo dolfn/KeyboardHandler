@@ -9,7 +9,7 @@ import KeyboardHandler
 class ViewControllerWithTextViewAndCenterConstraint: UIViewController, KeyboardHandlerDelegate {
     
     @IBOutlet weak var centerYConstraint: NSLayoutConstraint?
-    private var keyboardHandlerForCenteringConstraint: KeyboardHandlerForCenteringConstraint?
+    private var keyboardHandlerForGivenConstraint: KeyboardHandlerForGivenConstraint?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,9 +18,9 @@ class ViewControllerWithTextViewAndCenterConstraint: UIViewController, KeyboardH
             fatalError()
         }
         
-        keyboardHandlerForCenteringConstraint = KeyboardHandlerForCenteringConstraint(constraint: centerYConstraint)
-        keyboardHandlerForCenteringConstraint?.delegate = self
-        keyboardHandlerForCenteringConstraint?.startListeningForKeyboardEvents(in: NotificationCenter.default)
+        keyboardHandlerForGivenConstraint = try! KeyboardHandlerForGivenConstraint(constraintToAnimate: centerYConstraint, constraintOffset: 0, viewThatCanContainTextInputs: self.view, viewToDismissKeyboardOnTap: self.view, multiplier: 0.2)
+        keyboardHandlerForGivenConstraint?.delegate = self
+        keyboardHandlerForGivenConstraint?.startListeningForKeyboardEvents(in: NotificationCenter.default)
     }
     
     // MARK: - KeyboardHandlerDelegate

@@ -8,24 +8,25 @@ import KeyboardHandler
 
 class ViewControllerComplexExample: UIViewController, KeyboardHandlerDelegate {
     
+    @IBOutlet weak var viewToHandleUserTaps: UIView?
     @IBOutlet weak var centerYConstraint: NSLayoutConstraint?
     @IBOutlet private weak var bottomConstraintToAnimate: NSLayoutConstraint?
     
-    private var keyboardHandlerForBottomConstraint: KeyboardHandlerForBottomConstraint?
-    private var keyboardHandlerForCenteringConstraint: KeyboardHandlerForCenteringConstraint?
+    private var keyboardHandlerForBottomConstraint: KeyboardHandlerForGivenConstraint?
+    private var keyboardHandlerForCenteringConstraint: KeyboardHandlerForGivenConstraint?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        guard let centerYConstraint = centerYConstraint, let bottomConstraintToAnimate = bottomConstraintToAnimate else {
+        guard let centerYConstraint = centerYConstraint, let bottomConstraintToAnimate = bottomConstraintToAnimate, let viewToHandleUserTaps = viewToHandleUserTaps else {
             fatalError()
         }
         
-        keyboardHandlerForCenteringConstraint = KeyboardHandlerForCenteringConstraint(constraint: centerYConstraint)
+        keyboardHandlerForCenteringConstraint = try! KeyboardHandlerForGivenConstraint(constraintToAnimate: centerYConstraint, constraintOffset: 0, viewThatCanContainTextInputs: viewToHandleUserTaps, viewToDismissKeyboardOnTap: viewToHandleUserTaps, multiplier: 0.2)
         keyboardHandlerForCenteringConstraint?.delegate = self
         keyboardHandlerForCenteringConstraint?.startListeningForKeyboardEvents(in: NotificationCenter.default)
         
-        keyboardHandlerForBottomConstraint = KeyboardHandlerForBottomConstraint(constraintToAnimate: bottomConstraintToAnimate, constraintOffset: 0, viewThatCanContainTextInputs: self.view, viewToDismissKeyboardOnTap: self.view)
+        keyboardHandlerForBottomConstraint = try! KeyboardHandlerForGivenConstraint(constraintToAnimate: bottomConstraintToAnimate, constraintOffset: 0, viewThatCanContainTextInputs: viewToHandleUserTaps, viewToDismissKeyboardOnTap: viewToHandleUserTaps)
         keyboardHandlerForBottomConstraint?.delegate = self
         keyboardHandlerForBottomConstraint?.startListeningForKeyboardEvents(in: NotificationCenter.default)
     }

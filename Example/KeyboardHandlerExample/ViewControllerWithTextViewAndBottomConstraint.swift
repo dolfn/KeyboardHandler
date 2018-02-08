@@ -9,7 +9,7 @@ import KeyboardHandler
 class ViewControllerWithTextViewAndBottomConstraint: UIViewController, KeyboardHandlerDelegate {
     
     @IBOutlet private weak var bottomConstraintToAnimate: NSLayoutConstraint?
-    private var keyboardHandlerForBottomConstraint: KeyboardHandlerForBottomConstraint?
+    private var keyboardHandlerForGivenConstraint: KeyboardHandlerForGivenConstraint?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,9 +18,9 @@ class ViewControllerWithTextViewAndBottomConstraint: UIViewController, KeyboardH
             fatalError()
         }
         
-        keyboardHandlerForBottomConstraint = KeyboardHandlerForBottomConstraint(constraintToAnimate: bottomConstraintToAnimate, constraintOffset: 0, viewThatCanContainTextInputs: self.view, viewToDismissKeyboardOnTap: self.view)
-        keyboardHandlerForBottomConstraint?.delegate = self
-        keyboardHandlerForBottomConstraint?.startListeningForKeyboardEvents(in: NotificationCenter.default)
+        keyboardHandlerForGivenConstraint = try! KeyboardHandlerForGivenConstraint(constraintToAnimate: bottomConstraintToAnimate, constraintOffset: 0, viewThatCanContainTextInputs: self.view, viewToDismissKeyboardOnTap: self.view)
+        keyboardHandlerForGivenConstraint?.delegate = self
+        keyboardHandlerForGivenConstraint?.startListeningForKeyboardEvents(in: NotificationCenter.default)
     }
     
     // MARK: - KeyboardHandlerDelegate
